@@ -1,0 +1,49 @@
+{
+    "site_name": "eCom",
+    "base_url": "",
+    "db": {
+        "host": "127.0.0.1",
+        "user": "root",
+        "pass": "",
+        "base": "ecom-oo"
+    },
+
+    "menu" : {
+        "Home": {
+            "url": "/"
+        },
+
+        "Products": {
+            "url": "/products.html"
+        },
+
+        "Contact": {
+            "url": "/contact.html",
+            "sub": {
+                "Item 01": {
+                    "url": "/products.html"
+                },
+                "Item 02": {
+                    "url": "/products.html"
+                },
+                "divider": {},
+                "Item 03": {
+                    "url": "/products.html"
+                }
+            }
+        }
+    },
+
+    "css": [
+        "bootstrap.min.css",
+        "bootstrap-theme.min.css",
+        "styles.css"
+    ],
+
+    "js": [],
+
+    "js_end": [
+        "jquery-1.11.0.min.js",
+        "bootstrap.min.js"
+    ]
+}
