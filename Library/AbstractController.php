@@ -78,6 +78,9 @@ class AbstractController
 			// Création du chemin de la vue
 			$view = dirname(__DIR__) . '/Application/' . $this->app['route']['application'] . '/View/' . $this->app['route']['controller'] . '/' . $this->app['route']['action'] . '.php';
 		}
+        else {
+            $view = dirname(__DIR__) . '/Application/' . $this->app['route']['application'] . '/View/' . $view . '';
+        }
 
 		// Génération du la page finale
 		$this->app['response']->render($view);

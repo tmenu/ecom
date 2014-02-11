@@ -16,11 +16,7 @@ class ClientController extends AbstractController
 {
     public function init()
     {
-        // Si l'utilisateur est connecté
-        /*if ($this->app['session']->isAuth() !== true) 
-        {
-            $this->app['response']->redirect('frontend.member.login');
-        }*/
+        
     }
 
     public function indexAction()

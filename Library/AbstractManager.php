@@ -21,10 +21,24 @@ abstract class AbstractManager
         $this->dao = $dao;
     }
 
-    abstract public function select($id);
-    abstract public function selectAll();
+    abstract public function get($id);
+    abstract public function getAll();
 
-    abstract public function insert(AbstractEntity $entity);
-    abstract public function update(AbstractEntity $entity);
+    public function save(AbstractEntity $entity)
+    {
+        // Si l'entité n'a pas d'identifiant : nouvel enregistrement
+        if ($entity->getId() === null)
+        {
+            $this->insert($entity);
+        }
+        else // Sinon mise à jour
+        {
+            $this->update($entity);
+        }
+    }
+
+    abstract protected function insert(AbstractEntity $entity);
+    abstract protected function update(AbstractEntity $entity);
+
     abstract public function delete($id);
 }

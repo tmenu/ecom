@@ -18,7 +18,7 @@ use DateTime;
 
 class ClientManager extends AbstractManager
 {
-    public function select($id)
+    public function get($id)
     {
         $request = $this->dao->prepare('SELECT * FROM client WHERE id = :id');
         $request->bindValue(':id', $id);
@@ -32,11 +32,9 @@ class ClientManager extends AbstractManager
         {
             return false;
         }
-
-        
     }
 
-    public function selectByUsername($username)
+    public function getByUsername($username)
     {
         $request = $this->dao->prepare('SELECT COUNT(id) FROM client WHERE username = :username');
         $request->bindValue(':username', $username);
@@ -47,7 +45,7 @@ class ClientManager extends AbstractManager
         return $result;
     }
 
-    public function selectByEmail($email)
+    public function getByEmail($email)
     {
         $request = $this->dao->prepare('SELECT COUNT(id) FROM client WHERE email = :email');
         $request->bindValue(':email', $email);
