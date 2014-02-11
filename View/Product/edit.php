@@ -1,7 +1,7 @@
 <?php use Library\Utils; ?>
 
 <h2>
-    Création d'un nouveau produit
+    Edition d'un produit
     <a href="<?php echo Utils::generateUrl('product.index'); ?>" class="btn btn-default pull-right"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
 </h2>
 
@@ -58,7 +58,7 @@
     
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
-            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Ajouter</button>
+            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Editer</button>
         </div>
     </div>
 

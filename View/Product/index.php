@@ -18,26 +18,27 @@
     </thead>
 
     <tbody>
-        <?php foreach ($products_list as $product): ?>
+        <?php if (empty($products_list)): ?>
             <tr>
-                <td><?php echo $product['id']; ?></td>
-                <td>
-                    <a href="<?php echo Utils::generateUrl('product.show', array(Utils::slugify($product['name']), $product['id'])); ?>">
-                        <?php echo Utils::secure($product['name']); ?>
-                    </a>
-                </td>
-                <td><?php echo $product['price']; ?> &euro;</td>
-                <td><?php echo $product['date_created']; ?></td>
-                <td>
-                    <a href="<?php echo Utils::generateUrl('product.edit', array(Utils::slugify($product['name']), $product['id'])); ?>" title="Editer">
-                        <span class="glyphicon glyphicon-edit"></span>
-                    </a>&nbsp;
-                    <a href="<?php echo Utils::generateUrl('product.delete', array(Utils::slugify($product['name']), $product['id'])); ?>" title="Supprimer">
-                        <span class="glyphicon glyphicon-trash"></span>
-                    </a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
+                <td colspan="5" class="text-center">Aucun produit</td>
+        <?php else: ?>
+            <?php foreach ($products_list as $product): ?>
+                <tr>
+                    <td><?php echo $product['id']; ?></td>
+                    <td>
+                        <a href="<?php echo Utils::generateUrl('product.show', array(Utils::slugify($product['name']), $product['id'])); ?>">
+                            <?php echo Utils::secure($product['name']); ?>
+                        </a>
+                    </td>
+                    <td><?php echo $product['price']; ?> &euro;</td>
+                    <td><?php echo $product['date_created']; ?></td>
+                    <td>
+                        <a href="<?php echo Utils::generateUrl('product.edit', array(Utils::slugify($product['name']), $product['id'])); ?>" title="Editer"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;
+                        <a href="<?php echo Utils::generateUrl('product.delete', array(Utils::slugify($product['name']), $product['id'])); ?>" title="Supprimer"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </tbody>
 
 </table>

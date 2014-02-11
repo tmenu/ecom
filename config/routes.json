@@ -18,8 +18,8 @@
         "controller": "Product",
         "action": "show",
         "params": {
-            ":name": "[a-z]+",
-            ":id":   "[1-9]+"
+            ":name": "[a-z0-9]+",
+            ":id":   "[0-9]+"
         }
     },
 
@@ -34,18 +34,18 @@
         "controller": "Product",
         "action": "edit",
         "params": {
-            ":name": "[a-z]+",
-            ":id":   "[1-9]+"
+            ":name": "[a-z0-9-]+",
+            ":id":   "[0-9]+"
         }
     },
 
     "product.delete": {
         "regex": "/produits/supprimer-(:name)-(:id).html",
         "controller": "Product",
-        "action": "edit",
+        "action": "delete",
         "params": {
-            ":name": "[a-z]+",
-            ":id":   "[1-9]+"
+            ":name": "[a-z0-9-]+",
+            ":id":   "[0-9]+"
         }
     },
 
