@@ -1,7 +1,7 @@
 <?php use Library\Utils; ?>
 <h2>
   Edition d'un client
-  <a class="btn btn-default pull-right" href="<?php echo Utils::generateUrl('client.index'); ?>" title="Retour"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
+  <a class="btn btn-default pull-right" href="<?php echo Utils::generateUrl('backend.client.index'); ?>" title="Retour"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
 </h2>
 <form class="form-horizontal" role="form" id="form-client" method="POST">
   <div class="form-group  <?php echo ((isset($form_errors['username'])) ? 'has-error' : ''); ?>">

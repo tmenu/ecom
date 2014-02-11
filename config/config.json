@@ -26,14 +26,14 @@
             "url": "/login.html",
             "sub": {
                 "Login": {
-                    "url": "/login.html"
+                    "url": "/connexion.html"
                 },
                 "Logout": {
-                    "url": "/logout.html"
+                    "url": "/deconnexion.html"
                 },
                 "divider": {},
                 "Signup": {
-                    "url": "/signup.html"
+                    "url": "/inscription.html"
                 }
             }
         }

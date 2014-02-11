@@ -1,52 +1,60 @@
 {
     "_comment": " --- FRONTEND --- ",
 
-        "_comment": " --- Home controller",
+        "_comment": "Home controller",
 
-            "backend.home.index": {
+            "base": {
                 "regex": "/",
                 "application": "Frontend",
                 "controller": "Home",
                 "action": "index"
             },
 
+            "frontend.home.index": {
+                "regex": "/accueil.html",
+                "application": "Frontend",
+                "controller": "Home",
+                "action": "index"
+            },
+
+
         "_comment": " --- User controller",
 
-            "user.login": {
-                "regex": "/login.html",
+            "frontend.user.login": {
+                "regex": "/connexion.html",
                 "application": "Frontend",
                 "controller": "User",
                 "action": "login"
             },
 
-            "user.logout": {
-                "regex": "/logout.html",
+            "frontend.user.logout": {
+                "regex": "/deconnexion.html",
                 "application": "Frontend",
                 "controller": "User",
                 "action": "logout"
             },
 
-            "user.signup": {
-                "regex": "/signup.html",
+            "frontend.user.signup": {
+                "regex": "/inscription.html",
                 "application": "Frontend",
                 "controller": "User",
                 "action": "signup"
             },
 
 
-    "_comment": " --- BACKEND --- ",
+    "_comment": "BACKEND",
 
-        "_comment": " --- Product controller",
+        "_comment": "Product controller",
 
-            "product.index": {
+            "backend.product.index": {
                 "regex": "/produits.html",
                 "application": "Backend",
                 "controller": "Product",
                 "action": "index"
             },
 
-            "product.show": {
-                "regex": "/produits/(:name)-(:id).html",
+            "backend.product.show": {
+                "regex": "/produits/details/(:name)-(:id).html",
                 "application": "Backend",
                 "controller": "Product",
                 "action": "show",
@@ -56,15 +64,15 @@
                 }
             },
 
-            "product.add": {
+            "backend.product.add": {
                 "regex": "/produits/ajouter.html",
                 "application": "Backend",
                 "controller": "Product",
                 "action": "add"
             },
 
-            "product.edit": {
-                "regex": "/produits/editer-(:name)-(:id).html",
+            "backend.product.edit": {
+                "regex": "/produits/editer/(:name)-(:id).html",
                 "application": "Backend",
                 "controller": "Product",
                 "action": "edit",
@@ -74,8 +82,8 @@
                 }
             },
 
-            "product.delete": {
-                "regex": "/produits/supprimer-(:name)-(:id).html",
+            "backend.product.delete": {
+                "regex": "/produits/supprimer/(:name)-(:id).html",
                 "application": "Backend",
                 "controller": "Product",
                 "action": "delete",
@@ -86,24 +94,24 @@
             },
 
 
-        "_comment": " --- Client controller",
+        "_comment": "Client controller",
 
-            "client.index": {
+            "backend.client.index": {
                 "regex": "/clients.html",
                 "application": "Backend",
                 "controller": "Client",
                 "action": "index"
             },
 
-            "client.add": {
-                "regex": "/client/add.html",
+            "backend.client.add": {
+                "regex": "/client/ajouter.html",
                 "application": "Backend",
                 "controller": "Client",
                 "action": "add"
             },
 
-            "client.edit": {
-                "regex": "/client/edit/(:name)-(:id).html",
+            "backend.client.edit": {
+                "regex": "/client/editer/(:name)-(:id).html",
                 "application": "Backend",
                 "controller": "Client",
                 "action": "edit",
@@ -113,8 +121,8 @@
                 }
             },
 
-            "client.delete": {
-                "regex": "/client/delete/(:name)-(:id).html",
+            "backend.client.delete": {
+                "regex": "/client/supprimer/(:name)-(:id).html",
                 "application": "Backend",
                 "controller": "Client",
                 "action": "delete",
@@ -125,9 +133,9 @@
             },
 
 
-        "_comment": " --- Contact controller",
+        "_comment": "Contact controller",
 
-            "contact.index": {
+            "backend.contact.index": {
                 "regex": "/contact.html",
                 "application": "Backend",
                 "controller": "Home",
