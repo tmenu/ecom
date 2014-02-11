@@ -20,9 +20,9 @@ class Product extends AbstractEntity
 
     public function __construct($data = array())
     {
-        parent::__construct($data);
-
         $this->setDate_created(new DateTime());
+
+        parent::__construct($data);
     }
     
     /**

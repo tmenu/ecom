@@ -26,16 +26,17 @@ class ProductController extends AbstractController
 
     public function indexAction()
     {
+        // Définition du titre
         $this->app['response']->addVar('_MAIN_TITLE', 'Produits');
 
-        /*$product_m = $this->app['manager']->getManagerOf('Product');
+        // Recupération de la liste des produits
+        $product_manager = $this->app['manager']->getManagerOf('Product');
 
-        $p = $product_m->select(1);
+        $product_list = $product_manager->selectAll();
 
-        $p->setName('test');
+        $this->app['response']->addVar('products_list', $product_list);
 
-        $product_m->update($p);*/
-
+        // Génération de la vue
         $this->fetch();
     }
 }
