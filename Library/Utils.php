@@ -67,12 +67,12 @@ class Utils
     }
 
 	/**
-	 * secureHtml()
+	 * secure()
 	 * Description : Sécurise les caractères HTML pour un affichage.
 	 * @param string : La clé de va valeur POST à récupérer (ie : "username" ; "form1.field.username")
 	 * @return string : La valeur demandée
 	 */
-	static public function secureHTML($data)
+	static public function secure($data)
 	{
 		return htmlspecialchars($data);
 	}
@@ -117,13 +117,13 @@ class Utils
 	}
 
 	/**
-	 * makeURL()
+	 * generateUrl()
 	 * Description : Génère une URL à partir d'un nom de route et ses paramètres
 	 * @param string Le nom de la route
 	 * @param array La liste des paramètres
 	 * @return string L'URL générée
 	 */
-	static public function makeURL($route_name, array $params = array())
+	static public function generateUrl($route_name, array $params = array())
 	{
 		$routes = json_decode(file_get_contents(dirname(__DIR__) . '/config/routes.json'), true);
         

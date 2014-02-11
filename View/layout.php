@@ -84,6 +84,17 @@
 
 				<div class="col-sm-8">
 
+					<?php if (($flashs = $this->app['session']->getFlashMessage()) !== false): ?>
+
+						<?php foreach ($flashs as $flash): ?>
+							<div class="alert alert-<?php echo $flash['type']; ?> alert-dismissable">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  								<strong><?php echo ucfirst($flash['type']); ?> :</strong> <?php echo $flash['message']; ?>
+							</div>
+						<?php endforeach; ?>
+
+					<?php endif; ?>
+
 					<?php echo $__CONTENT; ?>
 
 				</div>
