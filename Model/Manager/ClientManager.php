@@ -24,9 +24,38 @@ class ClientManager extends AbstractManager
         $request->bindValue(':id', $id);
         $request->execute();
 
-        $result = $request->fetch();
+        if(($result = $request->fetch()) != false)
+        {
+            return new CLient($result);
+        }
+        else
+        {
+            return false;
+        }
 
-        return new CLient($result);
+        
+    }
+
+    public function selectByUsername($username)
+    {
+        $request = $this->dao->prepare('SELECT COUNT(id) FROM client WHERE username = :username');
+        $request->bindValue(':username', $username);
+        $request->execute();
+
+        $result = $request->fetchColumn();
+
+        return $result;
+    }
+
+    public function selectByEmail($email)
+    {
+        $request = $this->dao->prepare('SELECT COUNT(id) FROM client WHERE email = :email');
+        $request->bindValue(':email', $email);
+        $request->execute();
+
+        $result = $request->fetchColumn();
+
+        return $result;
     }
 
     public function selectAll()
