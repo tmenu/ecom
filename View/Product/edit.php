@@ -9,9 +9,9 @@
 
     <div class="form-group <?php echo ((isset($form_errors['name'])) ? 'has-error' : ''); ?>">
 
-        <label for="name" class="col-sm-3 control-label">Nom</label>
+        <label for="name" class="col-sm-2 control-label">Nom</label>
 
-        <div class="col-sm-9">
+        <div class="col-sm-10">
 
             <input type="text" class="form-control" id="name" name="name" placeholder="Nom" value="<?php echo Utils::postValue('name'); ?>">
 
@@ -25,9 +25,9 @@
 
     <div class="form-group <?php echo ((isset($form_errors['price'])) ? 'has-error' : ''); ?>">
 
-        <label for="price" class="col-sm-3 control-label">Prix</label>
+        <label for="price" class="col-sm-2 control-label">Prix</label>
 
-        <div class="col-sm-9">
+        <div class="col-sm-10">
 
             <input type="number" class="form-control" id="price" name="price" placeholder="Prix" value="<?php echo Utils::postValue('price'); ?>">
 
@@ -40,9 +40,9 @@
 
     <div class="form-group">
 
-        <label for="image" class="col-sm-3 control-label">Image</label>
+        <label for="image" class="col-sm-2 control-label">Image</label>
 
-        <div class="col-sm-9">
+        <div class="col-sm-10">
 
             <span class="btn btn-default btn-file pull-left">
                 <span class="glyphicon glyphicon-picture"></span> Parcourir <input type="file" name="image" id="image">
@@ -57,7 +57,7 @@
     </div>
     
     <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-9">
+        <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Editer</button>
         </div>
     </div>
