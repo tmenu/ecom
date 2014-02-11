@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Fichier : /Controller/ClientController.php
+ * Fichier : /Application/Backend/Controller/ClientController.php
  * Description : Controleur des clients
  * Auteur : Thomas Menu
  * Date : 10/02/2014
  */
 
-namespace Controller;
+namespace Application\Backend\Controller;
 
 use Library\AbstractController;
 use Model\Entity\Client;
