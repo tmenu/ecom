@@ -39,6 +39,12 @@ h6, .h6 {
   -webkit-columns: 3;
 }
 
+/* Page Client */
+
+#table-client, #table-client th{
+  text-align: center;
+}
+
 /* Sidebar modules for boxing content */
 .sidebar-module {
   padding: 15px;

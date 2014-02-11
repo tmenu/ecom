@@ -26,15 +26,10 @@ class ClientController extends AbstractController
     {
         $this->app['response']->addVar('_MAIN_TITLE', 'Clients');
         
-        /*$client_m = $this->app['manager']->getManagerOf('Client');
+        $client_manager = $this->app['manager']->getManagerOf('Client');
 
-        $p = $client_m->select(1);
-
-        $p->setUsername('test');
-
-        $client_m->update($p);
-
-        var_dump($p);*/
+        $clients_list = $client_manager->selectAll();
+        $this->app['response']->addVar('clients_list', $clients_list);
 
         $this->fetch();
     }
