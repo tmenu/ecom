@@ -13,7 +13,7 @@
       <?php endif; ?>
     </div>
   </div>
-  <div class="form-group  <?php echo ((isset($form_errors['password'])) ? 'has-error' : ''); ?>">
+  <!--<div class="form-group  <?php echo ((isset($form_errors['password'])) ? 'has-error' : ''); ?>">
     <label for="password" class="col-sm-4 control-label">Mot de passe</label>
     <div class="col-sm-8">
       <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe">
@@ -30,7 +30,7 @@
         <div class="help-block"><?php echo $form_errors['repassword']; ?></div>
       <?php endif; ?>
     </div>
-  </div>
+  </div>-->
   <div class="form-group  <?php echo ((isset($form_errors['email'])) ? 'has-error' : ''); ?>">
     <label for="email" class="col-sm-4 control-label">Adresse E-mail</label>
     <div class="col-sm-8">

@@ -148,7 +148,7 @@ class ClientController extends AbstractController
         $client_manager = $this->app['manager']->getManagerOf('Client');
         $client = $client_manager->select($_GET['id']);
 
-        if($client === false)
+        if ($client === false)
         {
             $this->app['session']->setFlashMessage('danger', 'Identifiant de client à modifier introuvable.');
             $this->app['response']->redirect('client.index');
@@ -189,7 +189,7 @@ class ClientController extends AbstractController
             // - min 6 caractères
             // - max 255 caractères
 
-            if (empty($_POST['password'])) {
+            /*if (empty($_POST['password'])) {
                 $form_errors['password'] = 'Mot de passe obligatoire';
             }
             else if (strlen($_POST['password']) < 6) {
@@ -197,18 +197,18 @@ class ClientController extends AbstractController
             }
             else if (strlen($_POST['password']) > 255) {
                 $form_errors['password'] = 'Maximum 255 caractères';
-            }
+            }*/
 
             // Confirmation mot de passe :
             // - obligatoire
             // - identique au mot de passe précédent
 
-            if (empty($_POST['repassword'])) {
+            /*if (empty($_POST['repassword'])) {
                 $form_errors['repassword'] = 'Confirmation mot de passe obligatoire';
             }
             else if ($_POST['repassword'] !== $_POST['password']) {
                 $form_errors['repassword'] = 'Doit être identique au premier';
-            }
+            }*/
 
             // Email :
             // - obligatoire
@@ -228,10 +228,8 @@ class ClientController extends AbstractController
             // S'il n'y a aucune erreur : enregistrement en BDD
             if (empty($form_errors))
             {
-                $client = new Client();
-
                 $client->setUsername($_POST['username']);
-                $client->setPassword($_POST['password']);
+                //$client->setPassword($_POST['password']);
                 $client->setEmail($_POST['email']);
 
                 $client_manager->update($client);
@@ -241,8 +239,8 @@ class ClientController extends AbstractController
                 $this->app['response']->redirect('client.index');
             }
 
-        // Affectation des erreurs de validation à la vue
-        $this->app['response']->addVar('form_errors', $form_errors);
+            // Affectation des erreurs de validation à la vue
+            $this->app['response']->addVar('form_errors', $form_errors);
         }
         else
         {
