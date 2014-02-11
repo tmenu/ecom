@@ -69,9 +69,11 @@ abstract class AbstractEntity implements ArrayAccess
      */
     public function offsetGet($var)
     {
-        if (isset($this->$var))
+        $method = 'get' . ucfirst(mb_strtolower($var));
+
+        if (method_exists($this, $method))
         {
-            return $this->$var;
+            return $this->$method();
         }
     }
     
