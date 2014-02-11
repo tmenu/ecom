@@ -12,6 +12,7 @@ namespace Model\Entity;
 use Library\Utils;
 use Library\AbstractEntity;
 use DateTime;
+use InvalidArgumentException;
 
 class Client extends AbstractEntity
 {
