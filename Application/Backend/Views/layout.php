@@ -1,1 +1,0 @@
-<?php include dirname(__DIR__) . '/../Frontend/Views/layout.php';
