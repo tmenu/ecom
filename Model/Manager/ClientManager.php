@@ -24,9 +24,16 @@ class ClientManager extends AbstractManager
         $request->bindValue(':id', $id);
         $request->execute();
 
-        $result = $request->fetch();
+        if(($result = $request->fetch()) != false)
+        {
+            return new CLient($result);
+        }
+        else
+        {
+            return false;
+        }
 
-        return new CLient($result);
+        
     }
 
     public function selectByUsername($username)
