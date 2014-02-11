@@ -10,6 +10,7 @@
 namespace Library;
 
 use Exception;
+use DOMDocument;
 
 class Router extends ApplicationComponent
 {
@@ -34,8 +35,13 @@ class Router extends ApplicationComponent
 	public function matchRoute($uri)
 	{
 		// Parcours des diffèrentes routes
-		foreach ($this->routes as $route)
+		foreach ($this->routes as $key => $route)
 		{
+			// Si c'est une commentaire : on ignore
+			if ($key == '_comment') {
+				continue;
+			}
+
 			// Création du mask de la regex
 			$regex = '#^' . $this->app['config']['base_url'] . $route['regex'] . '$#';
 
