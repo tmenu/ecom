@@ -4,13 +4,66 @@
  * Fichier : /Library/Utils.php
  * Description : Fonctions d'aides
  * Auteur Thomas Menu
- * Date : 08/12/2013
+ * Date : 10/02/2014
  */
 
 namespace Library;
 
 class Utils
 {
+	/**
+     * Generate random string
+     *
+     * @param int $length = 10 Lenght of the string to generate
+     *
+     * @return string Generated string
+     */
+    static public function generateString($length = 10)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $random_string = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $random_string .= $characters[mt_rand(0, strlen($characters) - 1)];
+        }
+
+        return $random_string;
+    }
+
+    /**
+     * Generate random string
+     *
+     * @param int $length = 10 Lenght of the string to generate
+     *
+     * @return string Generated string
+     */
+    static public function randomLipsum($amount = 1, $what = 'paras', $start = 0)
+    {
+        $data = simplexml_load_file('http://www.lipsum.com/feed/xml?amount='.$amount.'&what='.$what.'&start='.$start)->lipsum;
+    
+        if ($what = 'words') {
+            $data = substr($data, 0, strpos($data, ' '));
+        }
+
+        return $data;
+    }
+
+    /**
+     * Generate hash of a string
+     *
+     * @param void
+     *
+     * @return string String hashed
+     */
+    static public function hashString($string, $salt = '')
+    {
+        for ($i = 0; $i < 50000; $i++) {
+            $string = hash('sha512', $string.$salt);
+        }
+
+        return $string;
+    }
+
 	/**
 	 * secureHtml()
 	 * Description : Sécurise les caractères HTML pour un affichage.
@@ -20,23 +73,6 @@ class Utils
 	static public function secureHTML($data)
 	{
 		return htmlspecialchars($data);
-	}
-
-	/**
-	 * hashPassword()
-	 * Description : Génére le hash d'un mot de passe
-	 * @param string Le mot de passe
-	 * @return string Le hash du mot de passe
-	 */
-	static public function hashPassword($password)
-	{
-		$salt = 'rf!p!WC7fS7L4*Ys$Ps2t6$49Dzw5R)(!2(h9$6V';
-
-		for ($i = 0; $i < 5000; $i++) { 
-			$password = hash('sha512', $password);
-		}
-
-		return $password;
 	}
 
 	/**
@@ -76,19 +112,6 @@ class Utils
 				return $array[ $key ];
 			}
 		}
-	}
-
-	/**
-	 * createPsswd()
-	 * Description : Génère un mot de passe aléatoire
-	 * @param int le nombre de caractères (par défault 6)
-	 * @return string mot de passe génèrée
-	 */
-	static public function createPsswd($nbCara = 6)
-	{
-		// Liste des caractères disponible
-		$chars = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN0123456789";
-		return $password = substr(str_shuffle($chars), 0, $nbCara);
 	}
 
 	/**

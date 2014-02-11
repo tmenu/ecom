@@ -26,15 +26,15 @@ class ClientController extends AbstractController
     {
         $this->app['response']->addVar('_MAIN_TITLE', 'Clients');
         
-        // Récupération de l'instance de PDO
-        //$pdo = $this->app['manager']->getPDO();
+        /*$client_m = $this->app['manager']->getManagerOf('Client');
 
-        // Création de la requète
-        //$q = $pdo->query("SELECT id_news, subject, content, DATE_FORMAT(date, '%e %M %Y à %H:%i') as dateformated FROM news ORDER BY date DESC");
-        //$results = $q->fetchAll();
-        
-        // Ajout de la liste à la vue
-        //$this->app['response']->addVar('news_list', $results);
+        $p = $client_m->select(1);
+
+        $p->setUsername('test');
+
+        $client_m->update($p);
+
+        var_dump($p);*/
 
         $this->fetch();
     }

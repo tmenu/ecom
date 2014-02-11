@@ -9,7 +9,9 @@
 
 namespace Controller;
 
+use Library\Utils;
 use Library\AbstractController;
+use Model\Entity\Product;
 
 class ProductController extends AbstractController
 {
@@ -25,16 +27,14 @@ class ProductController extends AbstractController
     public function indexAction()
     {
         $this->app['response']->addVar('_MAIN_TITLE', 'Produits');
-        
-        // Récupération de l'instance de PDO
-        //$pdo = $this->app['manager']->getPDO();
 
-        // Création de la requète
-        //$q = $pdo->query("SELECT id_news, subject, content, DATE_FORMAT(date, '%e %M %Y à %H:%i') as dateformated FROM news ORDER BY date DESC");
-        //$results = $q->fetchAll();
-        
-        // Ajout de la liste à la vue
-        //$this->app['response']->addVar('news_list', $results);
+        /*$product_m = $this->app['manager']->getManagerOf('Product');
+
+        $p = $product_m->select(1);
+
+        $p->setName('test');
+
+        $product_m->update($p);*/
 
         $this->fetch();
     }
