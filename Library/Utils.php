@@ -9,6 +9,8 @@
 
 namespace Library;
 
+use Exception;
+
 class Utils
 {
 	/**
@@ -123,21 +125,15 @@ class Utils
 	 */
 	static public function makeURL($route_name, array $params = array())
 	{
-		// Si on a pas encore chargé les routes
-		if (empty(Library\Router::$routes))
-		{
-			// Récupération des routes
-			//require_once('../config/routes.php');
-			self::$routes = json_decode(file_get_contents('../config/routes.json'), true);
-		}
-
+		$routes = json_decode(file_get_contents(dirname(__DIR__) . '/config/routes.json'), true);
+        
 		// Si la route demandée n'existe pas
-		if (!isset(Library\Router::$routes[$route_name])) {
+		if (!$routes[$route_name]) {
 			throw new Exception('Route '. $route_name . ' doesn\'t exists !');
 		}
 
 		// Génération de l'URL
-		$route = Library\Router::$routes[$route_name];
+		$route = $routes[$route_name];
 
 		$url = $route['regex'];
 
@@ -149,7 +145,7 @@ class Utils
 			}
 		}
 
-		return BASE_URL.$url;
+		return $url;
 	}
 
 	/**
@@ -219,4 +215,29 @@ class Utils
 			return mktime((int)substr($date, 11, 2), (int)substr($date, 14, 2), 0, (int)substr($date, 5, 2), (int)substr($date, 8, 2), (int)substr($date, 0, 4));
 		}
 	}
+
+    static public function slugify($text)
+    { 
+        // replace non letter or digits by -
+        $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+
+        // trim
+        $text = trim($text, '-');
+
+        // transliterate
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+        // lowercase
+        $text = strtolower($text);
+
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        if (empty($text))
+        {
+        return 'n-a';
+        }
+
+        return $text;
+    }
 }

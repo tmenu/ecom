@@ -1,4 +1,4 @@
-<h1 class="home-title">Welcome on eCom.fr</h1>
+<h1 class="home-title">Bienvenue sur eCom.fr</h1>
 
 <div class="home-content">
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu quam non arcu imperdiet fermentum. Duis arcu justo, fermentum in facilisis et, feugiat id nisl.</p>

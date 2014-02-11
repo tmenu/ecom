@@ -9,7 +9,9 @@
 
 namespace Library;
 
-abstract class AbstractEntity
+use ArrayAccess; // Pour utiliser l'objet comme un tableau
+
+abstract class AbstractEntity implements ArrayAccess
 {
     protected $id;
 
@@ -56,5 +58,51 @@ abstract class AbstractEntity
         $this->id = $id;
 
         return $this;
+    }
+
+    // Méthode de l'interface ArrayAccess pour utiliser l'objet comme un tableau
+
+    /**
+     * Getter d'un attribut
+     * @param string Nom de l'attribut
+     * @return
+     */
+    public function offsetGet($var)
+    {
+        if (isset($this->$var))
+        {
+            return $this->$var;
+        }
+    }
+    
+    /**
+     * Setter d'un attribut
+     * @param string Nom de l'attribut
+     * @param string Valeur
+     * @return
+     */
+    public function offsetSet($var, $value)
+    {
+        throw new Exception('Cannot set property on this object !');
+    }
+    
+    /**
+     * Test l'existance d'un attribut
+     * @param string Nom de l'attribut
+     * @return bool
+     */
+    public function offsetExists($var)
+    {
+        return isset($this->$var);
+    }
+    
+    /**
+     * Supprime un attribut
+     * @param string Nom de l'attribut
+     * @return void
+     */
+    public function offsetUnset($var)
+    {
+        throw new Exception('Cannot unset property on this object !');
     }
 }

@@ -6,9 +6,19 @@
     },
 
     "product.index": {
-        "regex": "/products.html",
+        "regex": "/produits.html",
         "controller": "Product",
         "action": "index"
+    },
+
+    "product.show": {
+        "regex": "/product/(:name)-(:id).html",
+        "controller": "Product",
+        "action": "index",
+        "params": {
+            ":name": "[a-z]+",
+            ":id":   "[1-9]+"
+        }
     },
 
     "client.index": {
