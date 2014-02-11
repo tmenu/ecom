@@ -18,6 +18,10 @@
             "url": "/products.html"
         },
 
+        "Clients": {
+            "url": "/clients.html"
+        },
+
         "Contact": {
             "url": "/contact.html",
             "sub": {

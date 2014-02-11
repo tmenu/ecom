@@ -1,21 +1,24 @@
 {
-    "frontend.home.index": {
+    "home.index": {
         "regex": "/",
-        "application": "Frontend",
         "controller": "Home",
         "action": "index"
     },
 
-    "frontend.product.index": {
+    "product.index": {
         "regex": "/products.html",
-        "application": "Frontend",
-        "controller": "Home",
+        "controller": "Product",
         "action": "index"
     },
 
-    "frontend.contact.index": {
+    "client.index": {
+        "regex": "/clients.html",
+        "controller": "Client",
+        "action": "index"
+    },
+
+    "contact.index": {
         "regex": "/contact.html",
-        "application": "Frontend",
         "controller": "Home",
         "action": "index"
     } 
