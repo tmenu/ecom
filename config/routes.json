@@ -1,4 +1,13 @@
 {
+    "_comment": "FRONTEND",
+
+
+
+
+    "_comment": "BACKEND",
+
+    "_comment": "Home controller",
+
     "backend.home.index": {
         "regex": "/",
         "application": "Backend",
@@ -6,7 +15,7 @@
         "action": "index"
     },
 
-
+    "_comment": "Product controller",
 
     "product.index": {
         "regex": "/produits.html",
@@ -56,7 +65,7 @@
     },
 
 
-
+    "_comment": "Client controller",
 
     "client.index": {
         "regex": "/clients.html",
@@ -94,6 +103,8 @@
         }
     },
 
+
+    "_comment": "Contact controller",
 
     "contact.index": {
         "regex": "/contact.html",
