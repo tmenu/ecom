@@ -1,6 +1,7 @@
 {
-    "home.index": {
+    "backend.home.index": {
         "regex": "/",
+        "application": "Backend",
         "controller": "Home",
         "action": "index"
     },
@@ -9,12 +10,14 @@
 
     "product.index": {
         "regex": "/produits.html",
+        "application": "Backend",
         "controller": "Product",
         "action": "index"
     },
 
     "product.show": {
         "regex": "/produits/(:name)-(:id).html",
+        "application": "Backend",
         "controller": "Product",
         "action": "show",
         "params": {
@@ -25,12 +28,14 @@
 
     "product.add": {
         "regex": "/produits/ajouter.html",
+        "application": "Backend",
         "controller": "Product",
         "action": "add"
     },
 
     "product.edit": {
         "regex": "/produits/editer-(:name)-(:id).html",
+        "application": "Backend",
         "controller": "Product",
         "action": "edit",
         "params": {
@@ -41,6 +46,7 @@
 
     "product.delete": {
         "regex": "/produits/supprimer-(:name)-(:id).html",
+        "application": "Backend",
         "controller": "Product",
         "action": "delete",
         "params": {
@@ -73,18 +79,21 @@
 
     "client.index": {
         "regex": "/clients.html",
+        "application": "Backend",
         "controller": "Client",
         "action": "index"
     },
 
     "client.add": {
         "regex": "/client/add.html",
+        "application": "Backend",
         "controller": "Client",
         "action": "add"
     },
 
     "client.edit": {
         "regex": "/client/edit/(:name)-(:id).html",
+        "application": "Backend",
         "controller": "Client",
         "action": "edit",
         "params": {
@@ -95,6 +104,7 @@
 
     "client.delete": {
         "regex": "/client/delete/(:name)-(:id).html",
+        "application": "Backend",
         "controller": "Client",
         "action": "delete",
         "params": {
@@ -106,6 +116,7 @@
 
     "contact.index": {
         "regex": "/contact.html",
+        "application": "Backend",
         "controller": "Home",
         "action": "index"
     } 

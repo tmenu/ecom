@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Fichier : /Controller/ProductController.php
+ * Fichier : /Application/Backend/Controller/ProductController.php
  * Description : Controleur des produits
  * Auteur : Thomas Menu
  * Date : 10/02/2014
  */
 
-namespace Controller;
+namespace Application\Backend\Controller;
 
 use Library\Utils;
 use Library\AbstractController;

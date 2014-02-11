@@ -26,7 +26,7 @@ class AbstractController
 		$this->app = $application;
 
 		// Création et définition du chemin du layout
-		$layout = dirname(__DIR__) . '/View/layout.php';
+		$layout = dirname(__DIR__) . '/Application/' . $this->app['route']['application'] . '/View/layout.php';
 
 		$this->app['response']->setLayout($layout);
 	}
@@ -76,7 +76,7 @@ class AbstractController
 		// Si aucune vue spécifique n'est requise : vue par defaut
 		if ($view === '') {
 			// Création du chemin de la vue
-			$view = dirname(__DIR__) . '/View/' . $this->app['route']['controller'] . '/' . $this->app['route']['action'] . '.php';
+			$view = dirname(__DIR__) . '/Application/' . $this->app['route']['application'] . '/View/' . $this->app['route']['controller'] . '/' . $this->app['route']['action'] . '.php';
 		}
 
 		// Génération du la page finale
