@@ -11,6 +11,7 @@ namespace Model\Entity;
 
 use Library\AbstractEntity;
 use DateTime;
+use InvalidArgumentException;
 
 class Product extends AbstractEntity
 {

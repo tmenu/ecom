@@ -14,6 +14,7 @@ use Library\AbstractManager;
 use Library\AbstractEntity;
 use Model\Entity\Product;
 use DateTime;
+use InvalidArgumentException;
 
 class ProductManager extends AbstractManager
 {
@@ -27,9 +28,34 @@ class ProductManager extends AbstractManager
 
         $q->execute();
 
-        $result = $q->fetch();
+        if (($result = $q->fetch()) !== false) {
+            return new Product($result);
+        }
+        else {
+            return false;
+        }
+    }
 
-        return new Product($result);
+    public function selectByName($name)
+    {
+        if (!is_string($name)) {
+            throw new InvalidArgumentException('$name must be a string');
+        }
+
+        $q = $this->dao->prepare('SELECT id, name, price, date_created
+                                  FROM product
+                                  WHERE name = :name');
+
+        $q->bindValue(':name', $name);
+
+        $q->execute();
+
+        if (($result = $q->fetch()) !== false) {
+            return new Product($result);
+        }
+        else {
+            return false;
+        }
     }
 
     public function selectAll()
@@ -39,15 +65,19 @@ class ProductManager extends AbstractManager
 
         $q->execute();
 
-        $results = $q->fetchAll();
+        if (($results = $q->fetchAll()) !== false) 
+        {
+            $products_list = array();
 
-        $products_list = array();
+            foreach ($results as $result) {
+                $products_list[] = new Product($result);
+            }
 
-        foreach ($results as $result) {
-            $products_list[] = new Product($result);
+            return $products_list;
         }
-
-        return $products_list;
+        else {
+            return false;
+        }
     }
 
     public function insert(AbstractEntity $product)

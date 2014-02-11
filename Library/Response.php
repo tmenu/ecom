@@ -107,7 +107,7 @@ class Response extends ApplicationComponent
      */
 	public function redirect($route_name, array $params = array())
 	{
-		$uri = Utils::generateUri($route_name, $params);
+		$uri = Utils::generateUrl($route_name, $params);
 
 		header('Location: '.$uri);
 		exit;

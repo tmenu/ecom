@@ -5,6 +5,8 @@
         "action": "index"
     },
 
+
+
     "product.index": {
         "regex": "/produits.html",
         "controller": "Product",
@@ -12,14 +14,43 @@
     },
 
     "product.show": {
-        "regex": "/product/(:name)-(:id).html",
+        "regex": "/produits/(:name)-(:id).html",
         "controller": "Product",
-        "action": "index",
+        "action": "show",
         "params": {
             ":name": "[a-z]+",
             ":id":   "[1-9]+"
         }
     },
+
+    "product.add": {
+        "regex": "/produits/ajouter.html",
+        "controller": "Product",
+        "action": "add"
+    },
+
+    "product.edit": {
+        "regex": "/produits/editer-(:name)-(:id).html",
+        "controller": "Product",
+        "action": "edit",
+        "params": {
+            ":name": "[a-z]+",
+            ":id":   "[1-9]+"
+        }
+    },
+
+    "product.delete": {
+        "regex": "/produits/supprimer-(:name)-(:id).html",
+        "controller": "Product",
+        "action": "edit",
+        "params": {
+            ":name": "[a-z]+",
+            ":id":   "[1-9]+"
+        }
+    },
+
+
+
 
     "client.index": {
         "regex": "/clients.html",
