@@ -58,6 +58,33 @@
         "action": "index"
     },
 
+    "client.add": {
+        "regex": "/client/add.html",
+        "controller": "Client",
+        "action": "add"
+    },
+
+    "client.edit": {
+        "regex": "/client/edit/(:name)-(:id).html",
+        "controller": "Client",
+        "action": "edit",
+        "params": {
+            ":name": "[a-z0-9]+",
+            ":id":   "[0-9]+"
+        }
+    },
+
+    "client.delete": {
+        "regex": "/client/delete/(:name)-(:id).html",
+        "controller": "Client",
+        "action": "delete",
+        "params": {
+            ":name": "[a-z0-9]+",
+            ":id":   "[0-9]+"
+        }
+    },
+
+
     "contact.index": {
         "regex": "/contact.html",
         "controller": "Home",

@@ -25,12 +25,12 @@ class Client extends AbstractEntity
 
     public function __construct($data = array())
     {
-        parent::__construct($data);
-
         $this->setDate_subscribed(new DateTime());
 
         $this->setNewToken();
         $this->setNewSalt();
+
+        parent::__construct($data);
     }
 
     /**

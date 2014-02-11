@@ -109,6 +109,7 @@ class Response extends ApplicationComponent
 	{
 		$uri = Utils::generateUrl($route_name, $params);
 
+
 		header('Location: '.$uri);
 		exit;
 	}
