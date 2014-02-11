@@ -14,15 +14,16 @@ use PDO;
 
 class Manager extends ApplicationComponent
 {
-	protected $dao = null;
+	protected $dao = null;         // Data Access Object
+	protected $managers = array(); // Tableau des managers
 
-	public function getPDO()
+	public function getDao()
 	{
 		// Si l'objet n'est pas instancié
 		if ($this->dao === null)
 		{
 			try {
-			    $this->dao = new PDO('mysql:host='.DB_HOST.';dbname='.DB_BASE, DB_USER, DB_PASSWORD);
+			    $this->dao = new PDO('mysql:host=' . $this->app['config']['db']['host'] . ';dbname=' . $this->app['config']['db']['base'], $this->app['config']['db']['user'], $this->app['config']['db']['pass']);
 			}
 			catch (Exception $e) {
 			    throw new Exception($e->getMessage());
@@ -32,5 +33,21 @@ class Manager extends ApplicationComponent
 		}
 
 		return $this->dao;
+	}
+
+	public function getManagerOf($entity)
+	{
+		if (!isset($this->managers[$entity]))
+		{
+			$manager_class = 'Model\\Manager\\' . ucfirst(mb_strtolower($entity)) . 'Manager';
+
+			if (!class_exists($manager_class)) {
+				throw new Exception('Class '. $manager_class . ' doesn\'t exists !');
+			}
+
+			$this->managers[$entity] = new $manager_class( $this->getDao() );
+		}
+
+		return $this->managers[$entity];
 	}
 }

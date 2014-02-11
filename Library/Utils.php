@@ -4,39 +4,77 @@
  * Fichier : /Library/Utils.php
  * Description : Fonctions d'aides
  * Auteur Thomas Menu
- * Date : 08/12/2013
+ * Date : 10/02/2014
  */
 
 namespace Library;
 
+use Exception;
+
 class Utils
 {
 	/**
-	 * secureHtml()
+     * Generate random string
+     *
+     * @param int $length = 10 Lenght of the string to generate
+     *
+     * @return string Generated string
+     */
+    static public function generateString($length = 10)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $random_string = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $random_string .= $characters[mt_rand(0, strlen($characters) - 1)];
+        }
+
+        return $random_string;
+    }
+
+    /**
+     * Generate random string
+     *
+     * @param int $length = 10 Lenght of the string to generate
+     *
+     * @return string Generated string
+     */
+    static public function randomLipsum($amount = 1, $what = 'paras', $start = 0)
+    {
+        $data = simplexml_load_file('http://www.lipsum.com/feed/xml?amount='.$amount.'&what='.$what.'&start='.$start)->lipsum;
+    
+        if ($what = 'words') {
+            $data = substr($data, 0, strpos($data, ' '));
+        }
+
+        return $data;
+    }
+
+    /**
+     * Generate hash of a string
+     *
+     * @param void
+     *
+     * @return string String hashed
+     */
+    static public function hashString($string, $salt = '')
+    {
+        for ($i = 0; $i < 50000; $i++) {
+            $string = hash('sha512', $string.$salt);
+        }
+
+        return $string;
+    }
+
+	/**
+	 * secure()
 	 * Description : Sécurise les caractères HTML pour un affichage.
 	 * @param string : La clé de va valeur POST à récupérer (ie : "username" ; "form1.field.username")
 	 * @return string : La valeur demandée
 	 */
-	static public function secureHTML($data)
+	static public function secure($data)
 	{
 		return htmlspecialchars($data);
-	}
-
-	/**
-	 * hashPassword()
-	 * Description : Génére le hash d'un mot de passe
-	 * @param string Le mot de passe
-	 * @return string Le hash du mot de passe
-	 */
-	static public function hashPassword($password)
-	{
-		$salt = 'rf!p!WC7fS7L4*Ys$Ps2t6$49Dzw5R)(!2(h9$6V';
-
-		for ($i = 0; $i < 5000; $i++) { 
-			$password = hash('sha512', $password);
-		}
-
-		return $password;
 	}
 
 	/**
@@ -79,42 +117,23 @@ class Utils
 	}
 
 	/**
-	 * createPsswd()
-	 * Description : Génère un mot de passe aléatoire
-	 * @param int le nombre de caractères (par défault 6)
-	 * @return string mot de passe génèrée
-	 */
-	static public function createPsswd($nbCara = 6)
-	{
-		// Liste des caractères disponible
-		$chars = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN0123456789";
-		return $password = substr(str_shuffle($chars), 0, $nbCara);
-	}
-
-	/**
-	 * makeURL()
+	 * generateUrl()
 	 * Description : Génère une URL à partir d'un nom de route et ses paramètres
 	 * @param string Le nom de la route
 	 * @param array La liste des paramètres
 	 * @return string L'URL générée
 	 */
-	static public function makeURL($route_name, array $params = array())
+	static public function generateUrl($route_name, array $params = array())
 	{
-		// Si on a pas encore chargé les routes
-		if (empty(Library\Router::$routes))
-		{
-			// Récupération des routes
-			//require_once('../config/routes.php');
-			self::$routes = json_decode(file_get_contents('../config/routes.json'), true);
-		}
-
+		$routes = json_decode(file_get_contents(dirname(__DIR__) . '/config/routes.json'), true);
+        
 		// Si la route demandée n'existe pas
-		if (!isset(Library\Router::$routes[$route_name])) {
+		if (!$routes[$route_name]) {
 			throw new Exception('Route '. $route_name . ' doesn\'t exists !');
 		}
 
 		// Génération de l'URL
-		$route = Library\Router::$routes[$route_name];
+		$route = $routes[$route_name];
 
 		$url = $route['regex'];
 
@@ -126,7 +145,7 @@ class Utils
 			}
 		}
 
-		return BASE_URL.$url;
+		return $url;
 	}
 
 	/**
@@ -196,4 +215,29 @@ class Utils
 			return mktime((int)substr($date, 11, 2), (int)substr($date, 14, 2), 0, (int)substr($date, 5, 2), (int)substr($date, 8, 2), (int)substr($date, 0, 4));
 		}
 	}
+
+    static public function slugify($text)
+    { 
+        // replace non letter or digits by -
+        $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+
+        // trim
+        $text = trim($text, '-');
+
+        // transliterate
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+        // lowercase
+        $text = strtolower($text);
+
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        if (empty($text))
+        {
+        return 'n-a';
+        }
+
+        return $text;
+    }
 }

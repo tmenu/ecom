@@ -52,7 +52,7 @@ class Application implements ArrayAccess
 	public function run()
 	{
 		// Création du namespace complet du controleur
-		$controller_name = 'Application\\' . $this->route['application'] . '\\Controller\\' . $this->route['controller'] . 'Controller';
+		$controller_name = 'Controller\\' . $this->route['controller'] . 'Controller';
 
 		// Si il n'éxiste pas
 		if (!class_exists($controller_name)) {

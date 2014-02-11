@@ -1,21 +1,65 @@
 {
-    "frontend.home.index": {
+    "home.index": {
         "regex": "/",
-        "application": "Frontend",
         "controller": "Home",
         "action": "index"
     },
 
-    "frontend.product.index": {
-        "regex": "/products.html",
-        "application": "Frontend",
-        "controller": "Home",
+
+
+    "product.index": {
+        "regex": "/produits.html",
+        "controller": "Product",
         "action": "index"
     },
 
-    "frontend.contact.index": {
+    "product.show": {
+        "regex": "/produits/(:name)-(:id).html",
+        "controller": "Product",
+        "action": "show",
+        "params": {
+            ":name": "[a-z0-9]+",
+            ":id":   "[0-9]+"
+        }
+    },
+
+    "product.add": {
+        "regex": "/produits/ajouter.html",
+        "controller": "Product",
+        "action": "add"
+    },
+
+    "product.edit": {
+        "regex": "/produits/editer-(:name)-(:id).html",
+        "controller": "Product",
+        "action": "edit",
+        "params": {
+            ":name": "[a-z0-9-]+",
+            ":id":   "[0-9]+"
+        }
+    },
+
+    "product.delete": {
+        "regex": "/produits/supprimer-(:name)-(:id).html",
+        "controller": "Product",
+        "action": "delete",
+        "params": {
+            ":name": "[a-z0-9-]+",
+            ":id":   "[0-9]+"
+        }
+    },
+
+
+
+
+    "client.index": {
+        "regex": "/clients.html",
+        "controller": "Client",
+        "action": "index"
+    },
+
+    "contact.index": {
         "regex": "/contact.html",
-        "application": "Frontend",
         "controller": "Home",
         "action": "index"
     } 

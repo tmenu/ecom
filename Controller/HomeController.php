@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Fichier : /Application/Frontend/Controller/HomeController.php
+ * Fichier : /Controller/HomeController.php
  * Description : Controleur d'accueil
  * Auteur : Thomas Menu
  * Date : 10/02/2014
  */
 
-namespace Application\Frontend\Controller;
+namespace Controller;
 
 use Library\AbstractController;
 

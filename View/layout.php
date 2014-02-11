@@ -67,28 +67,39 @@
 						</ul>
 						<form class="form-inline navbar-form navbar-right" role="form">
 							<div class="form-group">
-								<label class="sr-only" for="username">Username</label>
-								<input type="email" class="form-control input-sm" id="username" name="username" placeholder="Username">
+								<label class="sr-only" for="username">Login</label>
+								<input type="email" class="form-control input-sm" id="username" name="username" placeholder="Login">
 							</div>
 							<div class="form-group">
-								<label class="sr-only" for="password">Password</label>
-								<input type="password" class="form-control input-sm" id="password" name="password" placeholder="Password">
+								<label class="sr-only" for="password">Mot de passe</label>
+								<input type="password" class="form-control input-sm" id="password" name="password" placeholder="Mot de passe">
 							</div>
-							<button type="submit" class="btn btn-sm btn-default">Sign in</button>
+							<button type="submit" class="btn btn-sm btn-default">Connexion</button>
 						</form>
 					</div><!-- /.navbar-collapse -->
 				</div><!-- /.container-fluid -->
 			</nav>
 
-			<div class="row">
+			<div class="main-container row">
 
-				<div class="col-sm-8">
+				<div class="col-sm-9">
+
+					<?php if (($flashs = $this->app['session']->getFlashMessage()) !== false): ?>
+
+						<?php foreach ($flashs as $flash): ?>
+							<div class="alert alert-<?php echo $flash['type']; ?> alert-dismissable">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  								<strong><?php echo ucfirst($flash['type']); ?> :</strong> <?php echo $flash['message']; ?>
+							</div>
+						<?php endforeach; ?>
+
+					<?php endif; ?>
 
 					<?php echo $__CONTENT; ?>
 
 				</div>
 
-				<div class="col-sm-3 col-sm-offset-1">
+				<div class="col-sm-3">
 					<div class="sidebar-module sidebar-module-inset">
 						<h4>About</h4>
 						<p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>

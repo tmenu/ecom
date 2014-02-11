@@ -1,6 +1,7 @@
 {
     "site_name": "eCom",
     "base_url": "",
+    
     "db": {
         "host": "127.0.0.1",
         "user": "root",
@@ -9,26 +10,30 @@
     },
 
     "menu" : {
-        "Home": {
+        "Accueil": {
             "url": "/"
         },
 
-        "Products": {
-            "url": "/products.html"
+        "Produits": {
+            "url": "/produits.html"
+        },
+
+        "Clients": {
+            "url": "/clients.html"
         },
 
         "Contact": {
             "url": "/contact.html",
             "sub": {
                 "Item 01": {
-                    "url": "/products.html"
+                    "url": "/produits.html"
                 },
                 "Item 02": {
-                    "url": "/products.html"
+                    "url": "/produits.html"
                 },
                 "divider": {},
                 "Item 03": {
-                    "url": "/products.html"
+                    "url": "/produits.html"
                 }
             }
         }

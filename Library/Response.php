@@ -107,7 +107,7 @@ class Response extends ApplicationComponent
      */
 	public function redirect($route_name, array $params = array())
 	{
-		$uri = Utils::generateUri($route_name, $params);
+		$uri = Utils::generateUrl($route_name, $params);
 
 		header('Location: '.$uri);
 		exit;
@@ -121,7 +121,7 @@ class Response extends ApplicationComponent
 	public function redirect404()
 	{
 		$this->addCss('styles.css');
-		$this->setLayout(dirname(__DIR__) . '/Application/Frontend/Views/layout.php');
+		$this->setLayout(dirname(__DIR__) . '/View/layout.php');
 		$this->renderTemplate(dirname(__DIR__) . '/errors/404.html');
 	}
 
