@@ -1,9 +1,32 @@
 {
     "backend.home.index": {
         "regex": "/",
-        "application": "Backend",
+        "application": "Frontend",
         "controller": "Home",
         "action": "index"
+    },
+
+
+
+    "user.login": {
+        "regex": "/login.html",
+        "application": "Frontend",
+        "controller": "User",
+        "action": "login"
+    },
+
+    "product.logout": {
+        "regex": "/logout.html",
+        "application": "Frontend",
+        "controller": "User",
+        "action": "logout"
+    },
+
+    "product.signup": {
+        "regex": "/signup.html",
+        "application": "Frontend",
+        "controller": "User",
+        "action": "signup"
     },
 
 
@@ -55,25 +78,6 @@
         }
     },
 
-
-
-    "user.login": {
-        "regex": "/login.html",
-        "controller": "User",
-        "action": "login"
-    },
-
-    "product.logout": {
-        "regex": "/logout.html",
-        "controller": "User",
-        "action": "logout"
-    },
-
-    "product.signup": {
-        "regex": "/signup.html",
-        "controller": "User",
-        "action": "signup"
-    },
 
 
 

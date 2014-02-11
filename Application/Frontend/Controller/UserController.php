@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Fichier : /Controller/UserController.php
+ * Fichier : /Application/Frontend/Controller/UserController.php
  * Description : Controleur des utilisateurs
  * Auteur : Thomas Menu
  * Date : 10/02/2014
  */
 
-namespace Controller;
+namespace Application\Frontend\Controller;
 
 use Library\AbstractController;
 
