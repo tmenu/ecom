@@ -6,110 +6,117 @@
 
     "_comment": "BACKEND",
 
-    "_comment": "Home controller",
+        "_comment": "Home controller",
 
-    "backend.home.index": {
-        "regex": "/",
-        "application": "Backend",
-        "controller": "Home",
-        "action": "index"
-    },
+            "base": {
+                "regex": "/",
+                "application": "Backend",
+                "controller": "Home",
+                "action": "index"
+            },
 
-    "_comment": "Product controller",
+            "backend.home.index": {
+                "regex": "/accueil.html",
+                "application": "Backend",
+                "controller": "Home",
+                "action": "index"
+            },
 
-    "product.index": {
-        "regex": "/produits.html",
-        "application": "Backend",
-        "controller": "Product",
-        "action": "index"
-    },
+        "_comment": "Product controller",
 
-    "product.show": {
-        "regex": "/produits/(:name)-(:id).html",
-        "application": "Backend",
-        "controller": "Product",
-        "action": "show",
-        "params": {
-            ":name": "[a-z0-9]+",
-            ":id":   "[0-9]+"
-        }
-    },
+            "backend.product.index": {
+                "regex": "/produits.html",
+                "application": "Backend",
+                "controller": "Product",
+                "action": "index"
+            },
 
-    "product.add": {
-        "regex": "/produits/ajouter.html",
-        "application": "Backend",
-        "controller": "Product",
-        "action": "add"
-    },
+            "backend.product.show": {
+                "regex": "/produits/details/(:name)-(:id).html",
+                "application": "Backend",
+                "controller": "Product",
+                "action": "show",
+                "params": {
+                    ":name": "[a-z0-9]+",
+                    ":id":   "[0-9]+"
+                }
+            },
 
-    "product.edit": {
-        "regex": "/produits/editer-(:name)-(:id).html",
-        "application": "Backend",
-        "controller": "Product",
-        "action": "edit",
-        "params": {
-            ":name": "[a-z0-9-]+",
-            ":id":   "[0-9]+"
-        }
-    },
+            "backend.product.add": {
+                "regex": "/produits/ajouter.html",
+                "application": "Backend",
+                "controller": "Product",
+                "action": "add"
+            },
 
-    "product.delete": {
-        "regex": "/produits/supprimer-(:name)-(:id).html",
-        "application": "Backend",
-        "controller": "Product",
-        "action": "delete",
-        "params": {
-            ":name": "[a-z0-9-]+",
-            ":id":   "[0-9]+"
-        }
-    },
+            "backend.product.edit": {
+                "regex": "/produits/editer/(:name)-(:id).html",
+                "application": "Backend",
+                "controller": "Product",
+                "action": "edit",
+                "params": {
+                    ":name": "[a-z0-9-]+",
+                    ":id":   "[0-9]+"
+                }
+            },
 
-
-    "_comment": "Client controller",
-
-    "client.index": {
-        "regex": "/clients.html",
-        "application": "Backend",
-        "controller": "Client",
-        "action": "index"
-    },
-
-    "client.add": {
-        "regex": "/client/add.html",
-        "application": "Backend",
-        "controller": "Client",
-        "action": "add"
-    },
-
-    "client.edit": {
-        "regex": "/client/edit/(:name)-(:id).html",
-        "application": "Backend",
-        "controller": "Client",
-        "action": "edit",
-        "params": {
-            ":name": "[a-z0-9]+",
-            ":id":   "[0-9]+"
-        }
-    },
-
-    "client.delete": {
-        "regex": "/client/delete/(:name)-(:id).html",
-        "application": "Backend",
-        "controller": "Client",
-        "action": "delete",
-        "params": {
-            ":name": "[a-z0-9]+",
-            ":id":   "[0-9]+"
-        }
-    },
+            "backend.product.delete": {
+                "regex": "/produits/supprimer/(:name)-(:id).html",
+                "application": "Backend",
+                "controller": "Product",
+                "action": "delete",
+                "params": {
+                    ":name": "[a-z0-9-]+",
+                    ":id":   "[0-9]+"
+                }
+            },
 
 
-    "_comment": "Contact controller",
+        "_comment": "Client controller",
 
-    "contact.index": {
-        "regex": "/contact.html",
-        "application": "Backend",
-        "controller": "Home",
-        "action": "index"
-    } 
+            "backend.client.index": {
+                "regex": "/clients.html",
+                "application": "Backend",
+                "controller": "Client",
+                "action": "index"
+            },
+
+            "backend.client.add": {
+                "regex": "/client/ajouter.html",
+                "application": "Backend",
+                "controller": "Client",
+                "action": "add"
+            },
+
+            "backend.client.edit": {
+                "regex": "/client/editer/(:name)-(:id).html",
+                "application": "Backend",
+                "controller": "Client",
+                "action": "edit",
+                "params": {
+                    ":name": "[a-z0-9]+",
+                    ":id":   "[0-9]+"
+                }
+            },
+
+            "backend.client.delete": {
+                "regex": "/client/supprimer/(:name)-(:id).html",
+                "application": "Backend",
+                "controller": "Client",
+                "action": "delete",
+                "params": {
+                    ":name": "[a-z0-9]+",
+                    ":id":   "[0-9]+"
+                }
+            },
+
+
+        "_comment": "Contact controller",
+
+            "backend.contact.index": {
+                "regex": "/contact.html",
+                "application": "Backend",
+                "controller": "Home",
+                "action": "index"
+            } 
 }

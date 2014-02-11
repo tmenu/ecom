@@ -1,7 +1,7 @@
 <?php use Library\Utils ?>
 <h2>
 	Liste des clients
-	<a class="btn btn-primary pull-right" href="<?php echo Utils::generateUrl('client.add'); ?>" title="Ajouter"><span class="glyphicon glyphicon-plus"></span> Ajouter</a>
+	<a class="btn btn-primary pull-right" href="<?php echo Utils::generateUrl('backend.client.add'); ?>" title="Ajouter"><span class="glyphicon glyphicon-plus"></span> Ajouter</a>
 </h2>
 <table class="table table-hover" id="table-client">
 
@@ -23,8 +23,8 @@
 				<td><?php echo Utils::secure($client['email']); ?></td>
 				<td><?php echo $client['date_subscribed']; ?></td>
 				<td>
-					<a class="glyphicon glyphicon-edit" href="<?php echo Utils::generateUrl('client.edit',  array(Utils::slugify($client['username']), $client['id'])); ?>" title="Editer"></a>
-					<a class="glyphicon glyphicon-trash" href="<?php echo Utils::generateUrl('client.delete', array(Utils::slugify($client['username']), $client['id'])); ?>" title="Supprimer"></a>
+					<a class="glyphicon glyphicon-edit" href="<?php echo Utils::generateUrl('backend.client.edit',  array(Utils::slugify($client['username']), $client['id'])); ?>" title="Editer"></a>
+					<a class="glyphicon glyphicon-trash" href="<?php echo Utils::generateUrl('backend.client.delete', array(Utils::slugify($client['username']), $client['id'])); ?>" title="Supprimer"></a>
 			 	</td>
 			</tr>
 		<?php endforeach; ?>

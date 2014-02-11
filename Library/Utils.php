@@ -33,11 +33,13 @@ class Utils
     }
 
     /**
-     * Generate random string
+     * Generate Lorem lipsum
      *
-     * @param int $length = 10 Lenght of the string to generate
+     * @param int $amount = 1 Number of $what
+     * @param string $what = 'paras' What you would generate (params, words, bytes, or ???)
+     * @param int $start = 0 Start with "Lorem lipsum dolor ..."
      *
-     * @return string Generated string
+     * @return string Generated lipsum
      */
     static public function randomLipsum($amount = 1, $what = 'paras', $start = 0)
     {
@@ -53,7 +55,8 @@ class Utils
     /**
      * Generate hash of a string
      *
-     * @param void
+     * @param string $string Le string to hash
+     * @param string $salt = '' Salt to include in hash
      *
      * @return string String hashed
      */
@@ -67,23 +70,25 @@ class Utils
     }
 
 	/**
-	 * secure()
-	 * Description : Sécurise les caractères HTML pour un affichage.
-	 * @param string : La clé de va valeur POST à récupérer (ie : "username" ; "form1.field.username")
-	 * @return string : La valeur demandée
-	 */
+     * Secure data to output
+     *
+     * @param string $data Data to secure
+     *
+     * @return string Data secured
+     */
 	static public function secure($data)
 	{
 		return htmlspecialchars($data);
 	}
 
 	/**
-	 * postValue()
-	 * Description : Récupère des données dans le tableau $_POST
-	 * @param string La clé de la données à récupérer
-	 * @param array Le tableau dans lequel effectuer la recherche (pour une utilisation recursive)
-	 * @return string La données de demandée
-	 */
+     * Get a value in $_POST by a key
+     *
+     * @param string $key The key of the data (like "key.foo.bar" for $_POST['key']['foo']['bar'])
+     * @param array $array = array() Array where do the search instead of $_POST if given
+     *
+     * @return string The value
+     */
 	static public function postValue($keys, $array = array())
 	{
 		// Si pas de tableau en argument : utilisation du tableau POST
@@ -117,12 +122,13 @@ class Utils
 	}
 
 	/**
-	 * generateUrl()
-	 * Description : Génère une URL à partir d'un nom de route et ses paramètres
-	 * @param string Le nom de la route
-	 * @param array La liste des paramètres
-	 * @return string L'URL générée
-	 */
+     * Generate an URL with a given route name
+     *
+     * @param string $rout_name The name of the route you would generate
+     * @param array $params = array() The params for the URL
+     *
+     * @return string $url The generated URL
+     */
 	static public function generateUrl($route_name, array $params = array())
 	{
 		$routes = json_decode(file_get_contents(dirname(__DIR__) . '/config/routes.json'), true);
@@ -149,11 +155,12 @@ class Utils
 	}
 
 	/**
-	 * translateMySQLDate()
-	 * Description : Traduit jours/mois d'une date MySQL (http://dev.mysql.com/doc/refman/5.0/fr/date-and-time-functions.html#idm47771644203616)
-	 * @param string Date
-	 * @return string Date avec noms des jours/mois en francais
-	 */
+     * Translate english days and months into a string in french
+     *
+     * @param string $date Le string to translate
+     *
+     * @return string $date The string translated
+     */
 	static public function translateDate($date)
 	{
 		$trans = array(
@@ -206,16 +213,13 @@ class Utils
 		return str_replace(array_keys($trans), array_values($trans), $date);
 	}
 
-	static public function datetime2Timestamp($date)
-	{
-		if (empty($date) || $date == ' 00:00') {
-			return 0;
-		}
-		else {
-			return mktime((int)substr($date, 11, 2), (int)substr($date, 14, 2), 0, (int)substr($date, 5, 2), (int)substr($date, 8, 2), (int)substr($date, 0, 4));
-		}
-	}
-
+    /**
+     * Generate the slug of a string
+     *
+     * @param string $text The string to slugify
+     *
+     * @return string $text The string slugified
+     */
     static public function slugify($text)
     { 
         // replace non letter or digits by -
