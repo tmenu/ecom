@@ -1,0 +1,77 @@
+<?php use Library\Utils; ?>
+<h2>Inscription</h2>
+
+<form class="form-horizontal" role="form" method="post">
+
+    <div class="form-group <?php echo ((isset($form_errors['username'])) ? 'has-error' : ''); ?>">
+
+        <label for="username" class="col-sm-3 control-label">Nom d'utilisateur</label>
+
+        <div class="col-sm-9">
+
+            <input type="text" class="form-control" id="username" name="username" placeholder="Nom d'utilisateur" value="<?php echo Utils::postValue('username'); ?>">
+
+            <?php if (isset($form_errors['username'])): ?>
+                <div class="help-block"><?php echo $form_errors['username']; ?></div>
+            <?php endif; ?>
+
+        </div>
+
+    </div>
+
+    <div class="form-group <?php echo ((isset($form_errors['password'])) ? 'has-error' : ''); ?>">
+
+        <label for="password" class="col-sm-3 control-label">Mot de passe</label>
+
+        <div class="col-sm-9">
+
+            <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe">
+
+            <?php if (isset($form_errors['password'])): ?>
+                <div class="help-block"><?php echo $form_errors['password']; ?></div>
+            <?php endif; ?>
+
+        </div>
+
+    </div>
+
+    <div class="form-group <?php echo ((isset($form_errors['confirm_password'])) ? 'has-error' : ''); ?>">
+
+        <label for="confirm_password" class="col-sm-3 control-label">Confirmer</label>
+
+        <div class="col-sm-9">
+
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Mot de passe">
+
+            <?php if (isset($form_errors['confirm_password'])): ?>
+                <div class="help-block"><?php echo $form_errors['confirm_password']; ?></div>
+            <?php endif; ?>
+
+        </div>
+
+    </div>
+
+    <div class="form-group <?php echo ((isset($form_errors['email'])) ? 'has-error' : ''); ?>">
+
+        <label for="email" class="col-sm-3 control-label">Nom d'utilisateur</label>
+
+        <div class="col-sm-9">
+
+            <input type="email" class="form-control" id="email" name="email" placeholder="adresse@mail.fr" value="<?php echo Utils::postValue('email'); ?>">
+
+            <?php if (isset($form_errors['email'])): ?>
+                <div class="help-block"><?php echo $form_errors['email']; ?></div>
+            <?php endif; ?>
+
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> S'inscrire</button>
+        </div>
+    </div>
+
+</form>
+

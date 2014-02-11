@@ -51,6 +51,25 @@
 
 
 
+    "user.login": {
+        "regex": "/login.html",
+        "controller": "User",
+        "action": "login"
+    },
+
+    "product.logout": {
+        "regex": "/logout.html",
+        "controller": "User",
+        "action": "logout"
+    },
+
+    "product.signup": {
+        "regex": "/signup.html",
+        "controller": "User",
+        "action": "signup"
+    },
+
+
 
     "client.index": {
         "regex": "/clients.html",
