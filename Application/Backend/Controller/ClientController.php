@@ -87,14 +87,14 @@ class ClientController extends AbstractController
                 if ($client->isNew())
                 {
                     // Test si le nom n'éxiste pas
-                    if ($client_manager->getByUsername($_POST['username']) > 0) {
+                    if ($client_manager->getByUsername($_POST['username'])) {
                         $form_errors['username'] = 'Nom d\'utilisateur déjà utilisée';
                     }
                 }
                 else // sinon si on edit un produit
                 {
                     // Test si le nom n'éxiste pas uniquement si ce n'est pas le même
-                    if ($_POST['username'] != $client['username'] && $client_manager->getByUsername($_POST['username']) > 0) {
+                    if ($_POST['username'] != $client['username'] && $client_manager->getByUsername($_POST['username'])) {
                         $form_errors['username'] = 'Nom d\'utilisateur déjà utilisée';
                     }
                 }
@@ -139,7 +139,7 @@ class ClientController extends AbstractController
             else if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false) {
                 $form_errors['email'] = 'Adresse email invalide';
             }
-            else if ($client['email'] != $_POST['email'] && $client_manager->getByEmail($_POST['email']) > 0)
+            else
             {
                 $client_manager = $this->app['manager']->getManagerOf('Client');
 
@@ -147,14 +147,14 @@ class ClientController extends AbstractController
                 if ($client->isNew())
                 {
                     // Test si le nom n'éxiste pas
-                    if ($client_manager->getByEmail($_POST['email']) > 0) {
+                    if ($client_manager->getByEmail($_POST['email'])) {
                         $form_errors['email'] = 'Adresse email déjà utilisée';
                     }
                 }
                 else // sinon si on edit un produit
                 {
                     // Test si le nom n'éxiste pas uniquement si ce n'est pas le même
-                    if ($_POST['email'] != $client['email'] && $client_manager->getByEmail($_POST['email']) > 0) {
+                    if ($_POST['email'] != $client['email'] && $client_manager->getByEmail($_POST['email'])) {
                         $form_errors['email'] = 'Adresse email déjà utilisée';
                     }
                 }
@@ -233,7 +233,7 @@ class ClientController extends AbstractController
                 $client->setCountry($_POST['country']);
 
                 if (!$client->isNew()) {
-                    $client->setPassword($_POST['password']);
+                    $client->setPassword( Utils::hashString($_POST['password']) );
                 }
 
                 $client_manager->save($client);

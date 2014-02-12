@@ -20,7 +20,7 @@ class Session extends ApplicationComponent
 
 		// SI la session n'est pas initialisé
 		if (!isset($_SESSION['auth'])) {
-			$_SESSION['auth'] = false;
+			$this->setAuth(false);
 			$this->setAttr('id',       0);
 			$this->setAttr('username', '');
 			$this->setAttr('email',    '');

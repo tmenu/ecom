@@ -34,18 +34,9 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         
                         <?php echo $this->app->call('Frontend', 'Menu', 'main'); ?>
+
+                        <?php echo $this->app->call('Frontend', 'Menu', 'quickLogin'); ?>
                         
-                        <form class="form-inline navbar-form navbar-right" role="form">
-                            <div class="form-group">
-                                <label class="sr-only" for="username">Login</label>
-                                <input type="email" class="form-control input-sm" id="username" name="username" placeholder="Login">
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="password">Mot de passe</label>
-                                <input type="password" class="form-control input-sm" id="password" name="password" placeholder="Mot de passe">
-                            </div>
-                            <button type="submit" class="btn btn-sm btn-default">Connexion</button>
-                        </form>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
