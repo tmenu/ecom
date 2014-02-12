@@ -8,7 +8,7 @@ body {
 }
 
 .main-container {
-  margin: 0;
+  margin: 0 0 20px 0;
 }
 
 h1, .h1,
@@ -63,6 +63,53 @@ table td, table th {
 .glyphicon {
   margin-right: 3px;
 }
+
+
+
+
+.admin-panel .item {
+  height: 125px;
+  margin: 0 10px 10px 0;
+  padding: 20px;
+  text-align: left;  
+  font-family:'century gothic', helvetica, sans-serif;
+  color: #2A2A2A;
+  font-size: 1em;
+  text-transform: uppercase;
+  -webkit-transition: -webkit-transform .2s linear;
+  -moz-transition: -moz-transform .2s linear;
+  transition: transform .2s linear;
+  vertical-align: middle;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px #888888;
+}
+
+.admin-panel .item:hover {
+  -webkit-transform: scale(1.06);
+  -moz-transform: scale(1.06);
+  transform: scale(1.06);
+}
+
+.admin-panel .item .links {
+  margin: 5px 0 0 110px;
+}
+
+.admin-panel .item .links h4 {
+  text-align: center;
+}
+
+.admin-panel .item .links ul {
+  padding-left: 30px;
+}
+
+.admin-panel .item .links a {
+  cursor: pointer;
+}
+
+
+
+
+
 
 /*
  * Override Bootstrap's default container.

@@ -1,8 +1,16 @@
 <?php use Library\Utils ?>
 <h2>
 	Liste des clients
-	<a class="btn btn-primary pull-right" href="<?php echo Utils::generateUrl('backend.client.add'); ?>" title="Ajouter"><span class="glyphicon glyphicon-plus"></span> Ajouter</a>
+	<span class="pull-right">
+		<a class="btn btn-primary" href="<?php echo Utils::generateUrl('backend.client.add'); ?>" title="Ajouter">
+			<span class="glyphicon glyphicon-plus"></span> Créer client
+		</a>
+		<a class="btn btn-default" href="<?php echo Utils::generateUrl('backend.admin.index'); ?>" title="Retour">
+			<span class="glyphicon glyphicon-arrow-left"></span> Administration
+		</a>
+	</span>
 </h2>
+
 <table class="table table-hover" id="table-client">
 
 	<thead>
