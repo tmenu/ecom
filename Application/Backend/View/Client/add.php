@@ -1,11 +1,14 @@
 <?php use Library\Utils; ?>
 <h2>
   Ajout d'un client
-  <a class="btn btn-default pull-right" href="<?php echo Utils::generateUrl('backend.client.index'); ?>" title="Retour"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
+  <a class="btn btn-default pull-right" href="<?php echo Utils::generateUrl('backend.client.index'); ?>" title="Retour">
+    <span class="glyphicon glyphicon-arrow-left"></span> Liste clients
+  </a>
 </h2>
+
 <form class="form-horizontal" role="form" id="form-client" method="POST">
 
-  <div class="row">
+  <div class="row well">
 
     <div class="col-sm-6">
 

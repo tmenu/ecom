@@ -1,29 +1,21 @@
 {
-    "_comment": "FRONTEND",
-
-
-
-
-    "_comment": "BACKEND",
+    "_comment": " --- FRONTEND --- ",
 
         "_comment": "Home controller",
 
             "base": {
                 "regex": "/",
-                "application": "Backend",
+                "application": "Frontend",
                 "controller": "Home",
                 "action": "index"
             },
 
-            "backend.home.index": {
+            "frontend.home.index": {
                 "regex": "/accueil.html",
-                "application": "Backend",
+                "application": "Frontend",
                 "controller": "Home",
                 "action": "index"
             },
-
-<<<<<<< Updated upstream
-=======
 
         "_comment": " --- User controller",
 
@@ -60,7 +52,6 @@
                 "action": "index"
             },
 
->>>>>>> Stashed changes
         "_comment": "Product controller",
 
             "backend.product.index": {
@@ -71,7 +62,7 @@
             },
 
             "backend.product.show": {
-                "regex": "/produits/details/(:name)-(:id).html",
+                "regex": "/produits/details/(:name)_(:id).html",
                 "application": "Backend",
                 "controller": "Product",
                 "action": "show",
@@ -85,22 +76,22 @@
                 "regex": "/produits/ajouter.html",
                 "application": "Backend",
                 "controller": "Product",
-                "action": "add"
+                "action": "edit"
             },
 
             "backend.product.edit": {
-                "regex": "/produits/editer/(:name)-(:id).html",
+                "regex": "/produits/editer/(:name)_(:product_id).html",
                 "application": "Backend",
                 "controller": "Product",
                 "action": "edit",
                 "params": {
-                    ":name": "[a-z0-9-]+",
-                    ":id":   "[0-9]+"
+                    ":name":       "[a-z0-9-]+",
+                    ":product_id": "[0-9]+"
                 }
             },
 
             "backend.product.delete": {
-                "regex": "/produits/supprimer/(:name)-(:id).html",
+                "regex": "/produits/supprimer/(:name)_(:id).html",
                 "application": "Backend",
                 "controller": "Product",
                 "action": "delete",

@@ -18,7 +18,7 @@ use DateTime;
 
 class ClientManager extends AbstractManager
 {
-    public function select($id)
+    public function get($id)
     {
         $request = $this->dao->prepare('SELECT * FROM client WHERE id = :id');
         $request->bindValue(':id', $id);
@@ -32,30 +32,38 @@ class ClientManager extends AbstractManager
         {
             return false;
         }
-
-        
     }
 
-    public function selectByUsername($username)
+    public function getByUsername($username)
     {
-        $request = $this->dao->prepare('SELECT COUNT(id) FROM client WHERE username = :username');
+        $request = $this->dao->prepare('SELECT * FROM client WHERE username = :username');
         $request->bindValue(':username', $username);
         $request->execute();
 
-        $result = $request->fetchColumn();
-
-        return $result;
+        if (($result = $request->fetch()) != false)
+        {
+            return new CLient($result);
+        }
+        else
+        {
+            return false;
+        }
     }
 
-    public function selectByEmail($email)
+    public function getByEmail($email)
     {
-        $request = $this->dao->prepare('SELECT COUNT(id) FROM client WHERE email = :email');
+        $request = $this->dao->prepare('SELECT * FROM client WHERE email = :email');
         $request->bindValue(':email', $email);
         $request->execute();
 
-        $result = $request->fetchColumn();
-
-        return $result;
+        if (($result = $request->fetch()) != false)
+        {
+            return new CLient($result);
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public function getAll()
@@ -94,7 +102,7 @@ class ClientManager extends AbstractManager
                                             country         = :country');
 
         $request->bindValue('username',        $client->getUsername());
-        $request->bindValue('password',        Utils::hashString($client->getPassword()));
+        $request->bindValue('password',        $client->getPassword());
         $request->bindValue('email',           $client->getEmail());
         $request->bindValue('date_subscribed', $client->getDate_subscribed(true));
         $request->bindValue('token',           $client->getToken());
@@ -132,7 +140,7 @@ class ClientManager extends AbstractManager
                                         WHERE id = :id');
 
         $request->bindValue('username',        $client->getUsername());
-        $request->bindValue('password',        Utils::hashString($client->getPassword()));
+        $request->bindValue('password',        $client->getPassword());
         $request->bindValue('email',           $client->getEmail());
         $request->bindValue('date_subscribed', $client->getDate_subscribed(false));
         $request->bindValue('token',           $client->getToken());

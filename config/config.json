@@ -23,18 +23,18 @@
             "url": "/administration.html"
         },
 
-        "Contact": {
-            "url": "/contact.html",
+        "User": {
+            "url": "/login.html",
             "sub": {
-                "Item 01": {
-                    "url": "/produits.html"
+                "Login": {
+                    "url": "/connexion.html"
                 },
-                "Item 02": {
-                    "url": "/produits.html"
+                "Logout": {
+                    "url": "/deconnexion.html"
                 },
                 "divider": {},
-                "Item 03": {
-                    "url": "/produits.html"
+                "Signup": {
+                    "url": "/inscription.html"
                 }
             }
         }

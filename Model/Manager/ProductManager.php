@@ -18,7 +18,7 @@ use InvalidArgumentException;
 
 class ProductManager extends AbstractManager
 {
-    public function select($id)
+    public function get($id)
     {
         $q = $this->dao->prepare('SELECT id, name, price, date_created
                             FROM product
@@ -36,7 +36,7 @@ class ProductManager extends AbstractManager
         }
     }
 
-    public function selectByName($name)
+    public function getByName($name)
     {
         if (!is_string($name)) {
             throw new InvalidArgumentException('$name must be a string');
@@ -58,7 +58,7 @@ class ProductManager extends AbstractManager
         }
     }
 
-    public function selectAll()
+    public function getAll()
     {
         $q = $this->dao->prepare('SELECT id, name, price, date_created
                                   FROM product');
@@ -80,7 +80,7 @@ class ProductManager extends AbstractManager
         }
     }
 
-    public function insert(AbstractEntity $product)
+    protected function insert(AbstractEntity $product)
     {
         $q = $this->dao->prepare('INSERT INTO product
                                   SET name         = :name,
@@ -96,7 +96,7 @@ class ProductManager extends AbstractManager
         return $this;
     }
 
-    public function update(AbstractEntity $product)
+    protected function update(AbstractEntity $product)
     {
         $q = $this->dao->prepare('UPDATE product
                                   SET name         = :name,

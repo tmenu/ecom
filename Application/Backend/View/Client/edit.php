@@ -1,19 +1,21 @@
 <?php use Library\Utils; ?>
 <h2>
   Edition d'un client
-  <a class="btn btn-default pull-right" href="<?php echo Utils::generateUrl('backend.client.index'); ?>" title="Retour"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
+  <a class="btn btn-default pull-right" href="<?php echo Utils::generateUrl('backend.client.index'); ?>" title="Retour">
+    <span class="glyphicon glyphicon-arrow-left"></span> Liste clients
+  </a>
 </h2>
 <form class="form-horizontal" role="form" id="form-client" method="POST">
 
-  <div class="row">
+  <div class="row well">
 
     <div class="col-sm-6">
 
       <h3>Identifiants</h3>
 
       <div class="form-group  <?php echo ((isset($form_errors['username'])) ? 'has-error' : ''); ?>">
-        <label for="username" class="col-sm-4 control-label">Nom d'utilisateur</label>
-        <div class="col-sm-8">
+        <label for="username" class="col-sm-5 control-label">Nom d'utilisateur</label>
+        <div class="col-sm-7">
           <input type="text" class="form-control" id="username" name="username" placeholder="Nom d'utilisateur" value="<?php echo Utils::postValue('username'); ?>">
           <?php if (isset($form_errors['username'])): ?>
            <div class="help-block"><?php echo $form_errors['username']; ?></div>
@@ -22,8 +24,8 @@
       </div>
 
       <div class="form-group  <?php echo ((isset($form_errors['password'])) ? 'has-error' : ''); ?>">
-        <label for="password" class="col-sm-4 control-label">Mot de passe</label>
-        <div class="col-sm-8">
+        <label for="password" class="col-sm-5 control-label">Mot de passe</label>
+        <div class="col-sm-7">
           <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe">
           <div class="help-block"><i>Laissez vide pour conserver le mot de passe actuelle</i></div>
           <?php if (isset($form_errors['password'])): ?>
@@ -33,8 +35,8 @@
       </div>
 
       <div class="form-group  <?php echo ((isset($form_errors['repassword'])) ? 'has-error' : ''); ?>">
-        <label for="repassword" class="col-sm-4 control-label">Répéter mot de passe</label>
-        <div class="col-sm-8">
+        <label for="repassword" class="col-sm-5 control-label">Répéter mot de passe</label>
+        <div class="col-sm-7">
           <input type="password" class="form-control" id="repassword" name="repassword" placeholder="Mot de passe">
           <?php if (isset($form_errors['repassword'])): ?>
             <div class="help-block"><?php echo $form_errors['repassword']; ?></div>
@@ -43,8 +45,8 @@
       </div>
 
       <div class="form-group  <?php echo ((isset($form_errors['email'])) ? 'has-error' : ''); ?>">
-        <label for="email" class="col-sm-4 control-label">Adresse E-mail</label>
-        <div class="col-sm-8">
+        <label for="email" class="col-sm-5 control-label">Adresse E-mail</label>
+        <div class="col-sm-7">
           <input type="email" class="form-control" id="email" name="email" placeholder="exemple@exemple.fr" value="<?php echo Utils::postValue('email'); ?>">
           <?php if (isset($form_errors['email'])): ?>
               <div class="help-block"><?php echo $form_errors['email']; ?></div>
@@ -53,8 +55,8 @@
       </div>
 
       <div class="form-group  <?php echo ((isset($form_errors['roles'])) ? 'has-error' : ''); ?>">
-        <label for="roles" class="col-sm-4 control-label">Rôle(s)</label>
-        <div class="col-sm-8">
+        <label for="roles" class="col-sm-5 control-label">Rôle(s)</label>
+        <div class="col-sm-7">
           
           <select name="roles[]" id="role" multiple class="form-control">
             <?php foreach ($this->app['config']['roles'] as $key => $role): ?>

@@ -17,4 +17,9 @@ class MenuController extends AbstractController
     {
         $this->fetchView();
     }
+
+    public function quickLoginAction()
+    {
+        $this->fetchView();
+    }
 }
