@@ -20,6 +20,11 @@ abstract class AbstractEntity implements ArrayAccess
         $this->hydrate($data);
     }
 
+    public function isNew()
+    {
+        return ($this->id === null) ? true : false;
+    }
+
     private function hydrate(array $data)
     {
         foreach ($data as $key => $value)

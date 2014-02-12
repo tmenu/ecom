@@ -17,7 +17,6 @@
                 "action": "index"
             },
 
-
         "_comment": " --- User controller",
 
             "frontend.user.login": {
@@ -43,6 +42,15 @@
 
 
     "_comment": "BACKEND",
+
+        "_comment": "Admin controller",
+
+            "backend.admin.index": {
+                "regex": "/administration.html",
+                "application": "Backend",
+                "controller": "Admin",
+                "action": "index"
+            },
 
         "_comment": "Product controller",
 
@@ -107,17 +115,17 @@
                 "regex": "/client/ajouter.html",
                 "application": "Backend",
                 "controller": "Client",
-                "action": "add"
+                "action": "edit"
             },
 
             "backend.client.edit": {
-                "regex": "/client/editer/(:name)-(:id).html",
+                "regex": "/client/editer/(:name)-(:client_id).html",
                 "application": "Backend",
                 "controller": "Client",
                 "action": "edit",
                 "params": {
                     ":name": "[a-z0-9]+",
-                    ":id":   "[0-9]+"
+                    ":client_id":   "[0-9]+"
                 }
             },
 

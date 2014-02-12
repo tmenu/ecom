@@ -32,39 +32,9 @@
 
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav">
-
-							<?php foreach ($this->app['config']['menu'] as $title => $data):
-								$active = ($data['url'] == $this->app['request']->requestUri()) ? 'active ' : '';
-
-						  		if (isset($data['sub'])): ?>
-						  			<li class="<?php echo $active; ?>dropdown">
-						  				<a href="<?php echo $data['url']; ?>" class="dropdown-toggle" data-toggle="dropdown">
-							        		<?php echo $title; ?> <b class="caret"></b>
-							        	</a>
-							        	<ul class="dropdown-menu" role="menu">
-						        			<?php foreach ($data['sub'] as $title_sub => $data_sub): ?>
-
-						        				<?php if ($title_sub == 'divider'): ?>
-						        					<li class="divider"></li>
-							        			<?php else: ?>
-							        				<li><a href="<?php echo $data_sub['url']; ?>"><?php echo $title_sub; ?></a></li>
-							        			<?php endif; ?>
-											    
-											<?php endforeach; ?>
-										</ul>
-						        	</li>
-						  		<?php else: ?>
-						  			<li class="<?php echo $active; ?>">
-						  				<a href="<?php echo $data['url']; ?>">
-							        		<?php echo $title; ?>
-							        	</a>
-							        </li>
-							    <?php endif; ?>
-
-						    <?php endforeach; ?>
-
-						</ul>
+						
+						<?php echo $this->app->call('Frontend', 'Menu', 'main'); ?>
+						
 						<form class="form-inline navbar-form navbar-right" role="form">
 							<div class="form-group">
 								<label class="sr-only" for="username">Login</label>
@@ -82,7 +52,7 @@
 
 			<div class="main-container row">
 
-				<div class="col-sm-9">
+				<div class="col-sm-12">
 
 					<?php if (($flashs = $this->app['session']->getFlashMessage()) !== false): ?>
 
@@ -99,10 +69,10 @@
 
 				</div>
 
-				<div class="col-sm-3">
+				<!--<div class="col-sm-3">
 					<div class="sidebar-module sidebar-module-inset">
-						<h4>About</h4>
-						<p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+						<h4>Cart</h4>
+						<?php echo $this->app->call('Frontend', 'Cart', 'index', array('test' => 'foo')); ?>
 					</div>
 					<div class="sidebar-module">
 						<h4>Archives</h4>
@@ -129,9 +99,9 @@
 							<li><a href="#">Facebook</a></li>
 						</ol>
 					</div>
-				</div><!-- /.blog-sidebar -->
+				</div>
 
-			</div>
+			</div>-->
 
 		</div>
 

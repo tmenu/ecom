@@ -128,7 +128,7 @@ class Response extends ApplicationComponent
 
 	/**
      * Génére et envoi la page finale
-     * @param obj Route La route où redirigé
+     * @param string $view La vue à générer
      * @return void
      */
 	public function render($view)
@@ -153,4 +153,23 @@ class Response extends ApplicationComponent
 		include $this->layout_path;
 		exit;
 	}
+
+    /**
+     * Génére et envoi la vue
+     * @param string $view La vue à générer
+     * @return void
+     */
+    public function renderView($view)
+    {
+        // Si la vue n'existe pas
+        if (!file_exists($view)) {
+            throw new Exception('File '. $view . ' doesn\'t exists !');
+        }
+
+        // Extraction des variables à passer à la vue
+        extract($this->vars);
+
+        // Include de la vue
+        include $view;
+    }
 }
