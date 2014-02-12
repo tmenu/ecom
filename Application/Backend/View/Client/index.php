@@ -8,8 +8,9 @@
 	<thead>
 		<tr>
 			<th>#</th>
-			<th>Nom</th>
+			<th>Nom d'utilisateur</th>
 			<th>Email</th>
+			<th>Nom prénom</th>
 			<th>Date d'inscription</th>
 			<th>Action</th>
 		</tr>
@@ -21,6 +22,7 @@
 				<td><?php echo $client['id']; ?></td>
 				<td><?php echo Utils::secure($client['username']); ?></td>
 				<td><?php echo Utils::secure($client['email']); ?></td>
+				<td><?php echo Utils::secure($client['lastname'] . ' ' . $client['firstname']); ?></td>
 				<td><?php echo $client['date_subscribed']; ?></td>
 				<td>
 					<a class="glyphicon glyphicon-edit" href="<?php echo Utils::generateUrl('backend.client.edit',  array(Utils::slugify($client['username']), $client['id'])); ?>" title="Editer"></a>

@@ -65,7 +65,6 @@ class Router extends ApplicationComponent
 					$i = 1;
 					foreach ($route['params'] as $key => $value) {
 						$route['data'][$key] = $params[$i++];
-						
 					}
 				}
 

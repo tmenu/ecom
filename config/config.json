@@ -9,17 +9,18 @@
         "base": "ecom-oo"
     },
 
+    "roles": {
+        "USER": "Utilisateur simple",
+        "ADMIN": "Administrateur"
+    },
+
     "menu" : {
         "Accueil": {
             "url": "/"
         },
 
-        "Produits": {
-            "url": "/produits.html"
-        },
-
-        "Clients": {
-            "url": "/clients.html"
+        "Admin": {
+            "url": "/administration.html"
         },
 
         "Contact": {

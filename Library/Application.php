@@ -16,7 +16,6 @@ class Application implements ArrayAccess
 {
 	protected $config   = array(); // Tableau des données de config
 
-	protected $route    = null;    // Objet Route correspondant à la route actuelle
 	protected $request  = null;    // Objet de gestion de la requète HTTP
 	protected $response = null;    // Objet de gestion de la réponse HTTP
 	protected $manager  = null;    // Objet de gestion de la base de donnée
@@ -37,30 +36,59 @@ class Application implements ArrayAccess
 		$this->response = new Response($this);
 		$this->manager  = new Manager($this);
 		$this->session  = new Session($this);
-
-		// Recherche de la route demandée
-		$router = new Router();
-
-		$this->route = $router->matchRoute( $this->request->requestUri() );
 	}
 
 	/**
-	 * Méthode d'instanciation du contrôleur
+	 * Méthode d'instanciation et d'éxécution du contrôleur correspondant à la route demandée
 	 * @param void
 	 * @return void
 	 */
 	public function run()
 	{
+		// Recherche de la route demandée
+		$router = new Router();
+
+		$route = $router->matchRoute( $this->request->requestUri() );
+
 		// Création du namespace complet du controleur
-		$controller_name = 'Application\\' . $this->route['application'] . '\\Controller\\' . $this->route['controller'] . 'Controller';
+		$controller_name = 'Application\\' . $route['application'] . '\\Controller\\' . $route['controller'] . 'Controller';
 
 		// Si il n'éxiste pas
 		if (!class_exists($controller_name)) {
 			throw new Exception('Class '. $controller_name . ' doesn\'t exists !');
 		}
 
+		foreach ($route['data'] as $key => $value) {
+			$_GET[substr($key, 1)] = $value;
+		}
+
 		// Instanciation et excecution
-		$controller = new $controller_name($this);
+		$controller = new $controller_name($this, $route['application'], $route['controller'], $route['action']);
+		$controller->execute();
+	}
+
+	/**
+	 * Méthode d'instanciation et d'éxécution d'un controller donné
+	 * @param string $application Le nom de l'application
+     * @param string $controller Le nom du controleur
+     * @param string $action Le nom de l'action
+	 * @return void
+	 */
+	public function call($application, $controller, $action, $params = array())
+	{
+		// Création du namespace complet du controleur
+		$controller_name = 'Application\\' . $application . '\\Controller\\' . $controller . 'Controller';
+
+		// Si il n'éxiste pas
+		if (!class_exists($controller_name)) {
+			throw new Exception('Class '. $controller_name . ' doesn\'t exists !');
+		}
+
+		foreach ($params as $key => $value) {
+			$_GET[$key] = $value;
+		}
+
+		$controller = new $controller_name($this, $application, $controller, $action);
 		$controller->execute();
 	}
 

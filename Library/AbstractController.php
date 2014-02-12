@@ -10,23 +10,33 @@
 namespace Library;
 
 use Exception;
-use Library\Page;
 
 class AbstractController
 {
 	protected $app = null; // Lien vers l'application
 
+    protected $application;
+    protected $controller;
+    protected $action;
+
 	/**
      * Initialise le controleur
-     * @param obj Application L'application ayant instancié le controleur
+     * @param obj Application $app L'application ayant instancié le controleur
+     * @param string $application Le nom de l'application
+     * @param string $controller Le nom du controleur
+     * @param string $action Le nom de l'action
      * @return void
      */
-	public function __construct(Application $application)
+	public function __construct(Application $app, $application, $controller, $action)
 	{
-		$this->app = $application;
+		$this->app = $app;
+
+        $this->application = $application;
+        $this->controller  = $controller;
+        $this->action      = $action;
 
 		// Création et définition du chemin du layout
-		$layout = dirname(__DIR__) . '/Application/' . $this->app['route']['application'] . '/View/layout.php';
+		$layout = dirname(__DIR__) . '/Application/' . $this->application . '/View/layout.php';
 
 		$this->app['response']->setLayout($layout);
 	}
@@ -47,16 +57,11 @@ class AbstractController
 	public function execute()
 	{
 		// Création du nom de l'action
-		$method_name = $this->app['route']['action'] . 'Action';
+		$method_name = $this->action . 'Action';
 
 		// Si la méthode n'éxiste pas
 		if (!method_exists($this, $method_name)) {
 			throw new Exception('Method '. $method_name . ' doesn\'t exists !');
-		}
-
-		// Affectation des paramètres de la route au tableau $_GET pour une utilisation transparente
-		foreach ($this->app['route']['data'] as $key => $data) {
-			$_GET[substr($key, 1)] = $data;
 		}
 
 		// Initialisation
@@ -68,7 +73,7 @@ class AbstractController
 
 	/**
      * Genération de la page
-     * @param void
+     * @param string $view = '' La vue à générée
      * @return void
      */
 	public function fetch($view = '')
@@ -76,10 +81,33 @@ class AbstractController
 		// Si aucune vue spécifique n'est requise : vue par defaut
 		if ($view === '') {
 			// Création du chemin de la vue
-			$view = dirname(__DIR__) . '/Application/' . $this->app['route']['application'] . '/View/' . $this->app['route']['controller'] . '/' . $this->app['route']['action'] . '.php';
+			$view = dirname(__DIR__) . '/Application/' . $this->application . '/View/' . $this->controller . '/' . $this->action . '.php';
 		}
+        else {
+            $view = dirname(__DIR__) . '/Application/' . $this->application . '/View/' . $view;
+        }
 
 		// Génération du la page finale
 		$this->app['response']->render($view);
 	}
+
+    /**
+     * Genération d'une vue
+     * @param string $view = '' La vue à générée
+     * @return void
+     */
+    public function fetchView($view = '')
+    {
+        // Si aucune vue spécifique n'est requise : vue par defaut
+        if ($view === '') {
+            // Création du chemin de la vue
+            $view = dirname(__DIR__) . '/Application/' . $this->application . '/View/' . $this->controller . '/' . $this->action . '.php';
+        }
+        else {
+            $view = dirname(__DIR__) . '/Application/' . $this->application . '/View/' . $view . '';
+        }
+
+        // Génération du la page finale
+        $this->app['response']->renderView($view);
+    }
 }

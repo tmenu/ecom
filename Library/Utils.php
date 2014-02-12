@@ -111,7 +111,7 @@ class Utils
 				$keys = substr(strstr($keys, '.'), 1);
 
 				// Test suivant
-				return postValue($keys, $array[ $key ]);
+				return Utils::postValue($keys, $array[ $key ]);
 			}
 			else
 			{

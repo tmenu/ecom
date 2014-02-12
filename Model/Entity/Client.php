@@ -22,6 +22,14 @@ class Client extends AbstractEntity
     protected $token;
     protected $salt;
     protected $date_subscribed;
+    protected $roles = array();
+
+    protected $lastname;
+    protected $firstname;
+    protected $address;
+    protected $postal_code;
+    protected $city;
+    protected $country;
 
     public function __construct($data = array())
     {
@@ -206,9 +214,9 @@ class Client extends AbstractEntity
      *
      * @return mixed
      */
-    public function getDate_subscribed($sql = true)
+    public function getDate_subscribed($sql = false)
     {
-        if ($sql === true) {
+        if ($sql === false) {
             return $this->date_subscribed->format('d/m/Y H:i:s');
         }
         else {
@@ -231,6 +239,198 @@ class Client extends AbstractEntity
         }
 
         $this->date_subscribed = $date_subscribed;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of roles.
+     *
+     * @return mixed
+     */
+    public function getRoles($sql = false)
+    {
+        if ($sql === false) {
+            return $this->roles;
+        }
+        else {
+            return implode(',', $this->roles);
+        }
+    }
+
+    /**
+     * Sets the value of roles.
+     *
+     * @param mixed $roles the roles
+     *
+     * @return self
+     */
+    public function setRoles($roles)
+    {
+        if(is_string($roles))
+        {
+            $roles = explode(',', $roles);
+        }
+
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Add a role
+     *
+     * @param string $role the role
+     *
+     * @return self
+     */
+    public function addRole($role)
+    {
+        $this->roles[] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of lastname.
+     *
+     * @return mixed
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * Sets the value of lastname.
+     *
+     * @param mixed $lastname the lastname
+     *
+     * @return self
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of firstname.
+     *
+     * @return mixed
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * Sets the value of firstname.
+     *
+     * @param mixed $firstname the firstname
+     *
+     * @return self
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of address.
+     *
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Sets the value of address.
+     *
+     * @param mixed $address the address
+     *
+     * @return self
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of postal_code.
+     *
+     * @return mixed
+     */
+    public function getPostal_code()
+    {
+        return $this->postal_code;
+    }
+
+    /**
+     * Sets the value of postal_code.
+     *
+     * @param mixed $postal_code the postal_code
+     *
+     * @return self
+     */
+    public function setPostal_code($postal_code)
+    {
+        $this->postal_code = $postal_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of city.
+     *
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Sets the value of city.
+     *
+     * @param mixed $city the city
+     *
+     * @return self
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of country.
+     *
+     * @return mixed
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Sets the value of country.
+     *
+     * @param mixed $country the country
+     *
+     * @return self
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
 
         return $this;
     }

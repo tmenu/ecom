@@ -22,6 +22,45 @@
                 "action": "index"
             },
 
+<<<<<<< Updated upstream
+=======
+
+        "_comment": " --- User controller",
+
+            "frontend.user.login": {
+                "regex": "/connexion.html",
+                "application": "Frontend",
+                "controller": "User",
+                "action": "login"
+            },
+
+            "frontend.user.logout": {
+                "regex": "/deconnexion.html",
+                "application": "Frontend",
+                "controller": "User",
+                "action": "logout"
+            },
+
+            "frontend.user.signup": {
+                "regex": "/inscription.html",
+                "application": "Frontend",
+                "controller": "User",
+                "action": "signup"
+            },
+
+
+    "_comment": "BACKEND",
+
+        "_comment": "Admin controller",
+
+            "backend.admin.index": {
+                "regex": "/administration.html",
+                "application": "Backend",
+                "controller": "Admin",
+                "action": "index"
+            },
+
+>>>>>>> Stashed changes
         "_comment": "Product controller",
 
             "backend.product.index": {
@@ -85,17 +124,17 @@
                 "regex": "/client/ajouter.html",
                 "application": "Backend",
                 "controller": "Client",
-                "action": "add"
+                "action": "edit"
             },
 
             "backend.client.edit": {
-                "regex": "/client/editer/(:name)-(:id).html",
+                "regex": "/client/editer/(:name)-(:client_id).html",
                 "application": "Backend",
                 "controller": "Client",
                 "action": "edit",
                 "params": {
                     ":name": "[a-z0-9]+",
-                    ":id":   "[0-9]+"
+                    ":client_id":   "[0-9]+"
                 }
             },
 

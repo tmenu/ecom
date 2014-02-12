@@ -58,7 +58,7 @@ class ClientManager extends AbstractManager
         return $result;
     }
 
-    public function selectAll()
+    public function getAll()
     {
         $request = $this->dao->prepare('SELECT * FROM client');
         $request->execute();
@@ -75,28 +75,60 @@ class ClientManager extends AbstractManager
         return $clients_list;
     }
 
-    public function insert(AbstractEntity $client)
+    protected function insert(AbstractEntity $client)
     {
-        $request = $this->dao->prepare('INSERT INTO client SET username = :username, password = :password, email = :email, date_subscribed = :date_subscribed, token = :token, salt = :salt');
-        $request->bindValue('username', $client->getUsername());
-        $request->bindValue('password', Utils::hashString($client->getPassword()));
-        $request->bindValue('email',    $client->getEmail());
-        $request->bindValue('date_subscribed', $client->getDate_subscribed(false));
-        $request->bindValue('token',    $client->getToken());
-        $request->bindValue('salt',     $client->getSalt());
+        $request = $this->dao->prepare('INSERT INTO client 
+                                        SET username        = :username, 
+                                            password        = :password, 
+                                            email           = :email, 
+                                            date_subscribed = :date_subscribed, 
+                                            token           = :token, 
+                                            salt            = :salt,
+                                            roles           = :roles,
+
+                                            lastname        = :lastname,
+                                            firstname       = :firstname,
+                                            address         = :address,
+                                            postal_code     = :postal_code,
+                                            city            = :city,
+                                            country         = :country');
+
+        $request->bindValue('username',        $client->getUsername());
+        $request->bindValue('password',        Utils::hashString($client->getPassword()));
+        $request->bindValue('email',           $client->getEmail());
+        $request->bindValue('date_subscribed', $client->getDate_subscribed(true));
+        $request->bindValue('token',           $client->getToken());
+        $request->bindValue('salt',            $client->getSalt());
+        $request->bindValue('roles',           $client->getRoles(true));
+
+        $request->bindValue('lastname',        $client->getLastname());
+        $request->bindValue('firstname',       $client->getFirstname());
+        $request->bindValue('address',         $client->getAddress());
+        $request->bindValue('postal_code',     $client->getPostal_code());
+        $request->bindValue('city',            $client->getCity());
+        $request->bindValue('country',         $client->getCountry());
+
         $request->execute();
 
     }
 
-    public function update(AbstractEntity $client)
+    protected function update(AbstractEntity $client)
     {
         $request = $this->dao->prepare('UPDATE client
-                                        SET username = :username,
-                                            password = :password,
-                                            email = :email,
+                                        SET username        = :username,
+                                            password        = :password,
+                                            email           = :email,
                                             date_subscribed = :date_subscribed,
-                                            token = :token,
-                                            salt = :salt
+                                            token           = :token,
+                                            salt            = :salt,
+                                            roles           = :roles,
+
+                                            lastname        = :lastname,
+                                            firstname       = :firstname,
+                                            address         = :address,
+                                            postal_code     = :postal_code,
+                                            city            = :city,
+                                            country         = :country
                                         WHERE id = :id');
 
         $request->bindValue('username',        $client->getUsername());
@@ -105,6 +137,16 @@ class ClientManager extends AbstractManager
         $request->bindValue('date_subscribed', $client->getDate_subscribed(false));
         $request->bindValue('token',           $client->getToken());
         $request->bindValue('salt',            $client->getSalt());
+        $request->bindValue('roles',           $client->getRoles(true));
+
+
+        $request->bindValue('lastname',        $client->getLastname());
+        $request->bindValue('firstname',       $client->getFirstname());
+        $request->bindValue('address',         $client->getAddress());
+        $request->bindValue('postal_code',     $client->getPostal_code());
+        $request->bindValue('city',            $client->getCity());
+        $request->bindValue('country',         $client->getCountry());
+
         $request->bindValue('id',              $client->getId(), PDO::PARAM_INT);
 
         $request->execute();
@@ -120,15 +162,22 @@ class ClientManager extends AbstractManager
     public function installTable()
     {
         $request = $this->dao->prepare('CREATE TABLE IF NOT EXISTS `client` (
-                                  `id` int(11) NOT NULL AUTO_INCREMENT,
-                                  `username` varchar(255) NOT NULL,
-                                  `password` varchar(255) NOT NULL,
-                                  `email` varchar(255) NOT NULL,
-                                  `date_subscribed` datetime NOT NULL,
-                                  `token` varchar(255) NOT NULL,
-                                  `salt` varchar(255) NOT NULL,
-                                  PRIMARY KEY (`id`)
-                                ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;');
+                                          `id` int(11) NOT NULL AUTO_INCREMENT,
+                                          `username` varchar(255) NOT NULL,
+                                          `password` varchar(255) NOT NULL,
+                                          `email` varchar(255) NOT NULL,
+                                          `date_subscribed` datetime NOT NULL,
+                                          `token` varchar(255) NOT NULL,
+                                          `salt` varchar(255) NOT NULL,
+                                          `roles` text NOT NULL,
+                                          `lastname` varchar(255) NOT NULL,
+                                          `firstname` varchar(255) NOT NULL,
+                                          `address` varchar(255) NOT NULL,
+                                          `postal_code` varchar(255) NOT NULL,
+                                          `city` varchar(255) NOT NULL,
+                                          `country` varchar(255) NOT NULL,
+                                          PRIMARY KEY (`id`)
+                                        ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ');
         $request->execute();
     }
 
@@ -142,6 +191,14 @@ class ClientManager extends AbstractManager
             $client->setPassword('test');
             $client->setEmail(Utils::randomLipsum(1, 'words') . '@hotmail.fr');
             $client->setDate_subscribed(new DateTime( mt_rand(2012, 2013) . '-' . mt_rand(1, 12) . '-'. mt_rand(1, 28)));
+            $client->addRole('USER');
+
+            $client->setLastname('Florian');
+            $client->setFirstname('Martinelli');
+            $client->setAddress('address|address');
+            $client->setPostal_code('75000');
+            $client->setCity('Paris');
+            $client->setCountry('France');
 
             $this->insert($client);
         }
