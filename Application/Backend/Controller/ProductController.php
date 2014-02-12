@@ -17,7 +17,11 @@ class ProductController extends AbstractController
 {
     public function init()
     {
-        
+        if (!$this->app['session']->hasRole('ADMIN'))
+        {
+            $this->app['session']->setFlashMessage('danger', 'Vous n\'avez pas le droit d\'accéder à cette page.');
+            $this->app['response']->redirect('frontend.home.index');
+        }
     }
 
     /**
@@ -85,7 +89,7 @@ class ProductController extends AbstractController
                 // Si le nom du produit est diffèrent de l'ancien et déjà utilisé
 
                 // Si on créé un produit
-                if ($product->getId() === null)
+                if ($product->isNew())
                 {
                     // Test si le nom n'éxiste pas
                     if ($_POST['name'] != $product['name'] && $prod_manager->getByName($_POST['name'])) {
@@ -106,19 +110,63 @@ class ProductController extends AbstractController
                 $form_errors['price'] = 'Prix obligatoire';
             }
 
-            // Image obligatoire
-            //
-            //
+            // Description obligatoire
+            if (empty($_POST['description'])) {
+                $form_errors['description'] = 'Description obligatoire';
+            }
+
+            // Si on créé un produit OU qu'on en edit un et qu'on a selectionné une image
+            if ($product->isNew() || (!$product->isNew() && $_FILES['image']['error'] != 4))
+            {
+                // Image obligatoire
+                if ($_FILES['image']['error'] == 4) {
+                    $form_errors['image'] = 'Veuillez sélectionnez une image';
+                }
+                else if ($_FILES['image']['error'] != 0) {
+                    $form_errors['image'] = 'Une erreur s\'est produite pendant le transfert du fichier';
+                }
+                else
+                {
+                    $extensions_valides = array('jpg' , 'jpeg' , 'gif' , 'png');
+
+                    $extension_upload = strtolower(substr(strrchr($_FILES['image']['name'], '.'), 1));
+
+                    if (!in_array($extension_upload, $extensions_valides)) {
+                        $form_errors['image'] = 'Format de fichier non autorisé';
+                    }
+                }
+            }
 
             // Si aucune erreur : enregistrement du produit
             if (empty($form_errors))
             {
-                // Récupération du produit à modifier
+                // Si on créé un produit OU qu'on en edit un et qu'on a selectionné une image
+                if ($product->isNew() || (!$product->isNew() && $_FILES['image']['error'] == 0))
+                {
+                    // Création du chemin de l'image
+                    $upload_dir = dirname(__DIR__) . '/../../web';
+
+                    // Si c'est une édition : supression de l'ancienne image
+                    if (!$product->isNew())
+                    {
+                        unlink($upload_dir . $product->getImage());
+                    }
+
+                    // Enregistrement de l'image
+                    $image_path = '/upload/' . Utils::generateString(30) . '.' . strtolower(substr(strchr($_FILES['image']['name'], '.'), 1));
+
+                    move_uploaded_file($_FILES['image']['tmp_name'], $upload_dir.$image_path);
+
+                    $product->setImage($image_path);
+                }
+
+                // Récupération du manager des produits
                 $prod_manager = $this->app['manager']->getManagerOf('Product');
 
                 // Modification du produit
                 $product->setName($_POST['name']);
                 $product->setPrice($_POST['price']);
+                $product->setDescription($_POST['description']);
 
                 // Enregistrement du produit
                 $prod_manager->save($product);
@@ -126,7 +174,7 @@ class ProductController extends AbstractController
                 // Définition d'un message et redirection
 
                 // Si on créé un produit
-                if ($product->getId() === null)
+                if ($product->isNew())
                 {
                     $this->app['session']->setFlashMessage('success', 'Le produit à bien été créé.');
                 }
@@ -144,8 +192,10 @@ class ProductController extends AbstractController
         }
         else // Valeurs par defaut
         {
-            $_POST['name']  = $product->getName();
-            $_POST['price'] = $product->getPrice();
+            $_POST['name']        = $product->getName();
+            $_POST['price']       = $product->getPrice();
+            $_POST['description'] = $product->getDescription();
+            $_POST['image']       = $product->getImage();
         }
 
         // Ajout du fichier JS pour gérer l'upload
@@ -154,7 +204,7 @@ class ProductController extends AbstractController
         // Génération de la vue
 
         // Si on créé un produit
-        if ($product->getId() === null)
+        if ($product->isNew())
         {
             $this->fetch('Product/add.php');
         }
@@ -192,6 +242,10 @@ class ProductController extends AbstractController
             $prod_manager = $this->app['manager']->getManagerOf('Product');
 
             $prod_manager->delete($product->getId());
+
+            // Création du chemin de l'image
+            $upload_dir = dirname(__DIR__) . '/../../web';
+            unlink($upload_dir . $product->getImage());
 
             // Définition d'un message et redirection
             $this->app['session']->setFlashMessage('success', 'Le produit à bien été supprimé.');

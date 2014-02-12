@@ -2,10 +2,10 @@
 <h2>
 	Liste des clients
 	<span class="pull-right">
-		<a class="btn btn-primary" href="<?php echo Utils::generateUrl('backend.client.add'); ?>" title="Ajouter">
+		<a class="btn btn-primary" href="<?php echo Utils::generateUrl('backend.client.add'); ?>" title="Créer client">
 			<span class="glyphicon glyphicon-plus"></span> Créer client
 		</a>
-		<a class="btn btn-default" href="<?php echo Utils::generateUrl('backend.admin.index'); ?>" title="Retour">
+		<a class="btn btn-default" href="<?php echo Utils::generateUrl('backend.admin.index'); ?>" title="Administration">
 			<span class="glyphicon glyphicon-arrow-left"></span> Administration
 		</a>
 	</span>

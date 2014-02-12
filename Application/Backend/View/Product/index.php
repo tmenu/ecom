@@ -2,7 +2,14 @@
 
 <h2>
     Liste des produits
-    <a href="<?php echo Utils::generateUrl('backend.product.add'); ?>" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> Créer produit</a>
+    <span class="pull-right">
+        <a href="<?php echo Utils::generateUrl('backend.product.add'); ?>" class="btn btn-primary" title="Créer produit">
+            <span class="glyphicon glyphicon-plus"></span> Créer produit
+        </a>
+        <a class="btn btn-default" href="<?php echo Utils::generateUrl('backend.admin.index'); ?>" title="Administration">
+            <span class="glyphicon glyphicon-arrow-left"></span> Administration
+        </a>
+    </span>
 </h2>
 
 <table class="table table-hover">
@@ -13,6 +20,7 @@
             <th>Nom</th>
             <th>Prix</th>
             <th>Date ajout</th>
+            <th>Description</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -32,6 +40,7 @@
                     </td>
                     <td><?php echo $product['price']; ?> &euro;</td>
                     <td><?php echo $product['date_created']; ?></td>
+                    <td><?php echo nl2br(Utils::secure(Utils::truncate($product['description'], 60))); ?></td>
                     <td>
                         <a href="<?php echo Utils::generateUrl('backend.product.edit', array(Utils::slugify($product['name']), $product['id'])); ?>" title="Editer"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;
                         <a href="<?php echo Utils::generateUrl('backend.product.delete', array(Utils::slugify($product['name']), $product['id'])); ?>" title="Supprimer"><span class="glyphicon glyphicon-trash"></span></a>

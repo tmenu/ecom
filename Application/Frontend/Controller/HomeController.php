@@ -17,6 +17,10 @@ class HomeController extends AbstractController
 	{
 		$this->app['response']->addVar('_MAIN_TITLE', 'Accueil');
 
+        $products_list = $this->app['manager']->getManagerOf('Product')->getAll();
+
+        $this->app['response']->addVar('products_list', $products_list);
+
 		$this->fetch();
 	}
 }

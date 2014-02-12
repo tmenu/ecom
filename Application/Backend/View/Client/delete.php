@@ -1,7 +1,9 @@
 <?php use Library\Utils; ?>
 <h2>
 	Suppression d'un client
-	<a class="btn btn-default pull-right" href="<?php echo Utils::generateUrl('backend.client.index'); ?>" title="Retour"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
+	<a class="btn btn-default pull-right" href="<?php echo Utils::generateUrl('backend.client.index'); ?>" title="Liste clients">
+        <span class="glyphicon glyphicon-arrow-left"></span> Liste clients
+    </a>
 </h2>
 <form class="form-horizontal" role="form" method="post">
 

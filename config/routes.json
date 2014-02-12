@@ -40,6 +40,32 @@
                 "action": "signup"
             },
 
+        "_comment": " --- Product controller --- ",
+
+            "frontend.product.show": {
+                "regex": "/produits/details/(:name)_(:id).html",
+                "application": "Frontend",
+                "controller": "Product",
+                "action": "show",
+                "params": {
+                    ":name": "[a-z0-9]+",
+                    ":id":   "[0-9]+"
+                }
+            },
+
+        "_comment": " --- Cart controller --- ",
+
+            "frontend.cart.add": {
+                "regex": "/panier/ajouter/(:name)_(:id).html",
+                "application": "Frontend",
+                "controller": "Cart",
+                "action": "add",
+                "params": {
+                    ":name": "[a-z0-9]+",
+                    ":id":   "[0-9]+"
+                }
+            },
+
 
     "_comment": "BACKEND",
 
@@ -59,17 +85,6 @@
                 "application": "Backend",
                 "controller": "Product",
                 "action": "index"
-            },
-
-            "backend.product.show": {
-                "regex": "/produits/details/(:name)_(:id).html",
-                "application": "Backend",
-                "controller": "Product",
-                "action": "show",
-                "params": {
-                    ":name": "[a-z0-9]+",
-                    ":id":   "[0-9]+"
-                }
             },
 
             "backend.product.add": {

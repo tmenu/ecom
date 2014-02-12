@@ -18,6 +18,15 @@ class CartController extends AbstractController
         
     }
 
+    public function showAction()
+    {
+        $cart_list = array();
+
+        $this->app['response']->addVar('cart_list', $cart_list);
+
+        $this->fetchView();
+    }
+
     public function indexAction()
     {
         $this->app['response']->addVar('test', $_GET['test']);

@@ -1,25 +1,41 @@
+<?php use Library\Utils; ?>
+
 <h1 class="home-title">Bienvenue sur eCom.fr</h1>
 
-<div class="home-content">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu quam non arcu imperdiet fermentum. Duis arcu justo, fermentum in facilisis et, feugiat id nisl.</p>
+<?php for ($i = 0; $i <= count($products_list); $i++): ?>
 
-    <p>Mauris in lectus mattis, sollicitudin sem vitae, lacinia quam. Donec vitae augue vitae leo pretium lacinia nec et massa.</p>
+    <div class="row">
 
-    <p>Nullam facilisis nisi sapien, sit amet varius quam porta in. Suspendisse viverra rutrum mauris porttitor egestas. Vestibulum id nulla facilisis lorem ornare dignissim et non neque. Maecenas interdum euismod fringilla. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+        <?php for ($j = 0; $j <= 3 && isset($products_list[$i+$j]); $j++): ?>
 
-    <p>Pellentesque eleifend viverra velit vel aliquam. Praesent suscipit id urna ac molestie. In eu lacus a tellus fringilla molestie. Morbi eleifend et lorem ac scelerisque. Maecenas eget commodo est. Nam mattis neque euismod dolor adipiscing, imperdiet gravida tortor dignissim. Nulla non condimentum ante, vel feugiat tortor. Nunc fermentum felis ac est vehicula ullamcorper. Nam sed mauris id urna mattis elementum sed vitae libero.</p>
+            <?php
+            $product = $products_list[$i+$j];
+            ?>
 
-    <p>Nunc urna arcu, malesuada in lobortis non, fringilla ut elit. Ut lorem metus, tincidunt a nibh ac, sagittis sagittis justoelit.</p>
-</div>
+            <div class="col-sm-4">
 
-<div class="home-content">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu quam non arcu imperdiet fermentum. Duis arcu justo, fermentum in facilisis et, feugiat id nisl.</p>
+                <div class="thumbnail">
+                    <img src="<?php echo $product['image']; ?>" alt="<?php echo Utils::secure($product['name']); ?>">
+                    <div class="caption">
+                        <h4><?php echo Utils::secure($product['name']); ?></h4>
+                        <p><?php echo nl2br(Utils::secure($product['description'])); ?></p>
+                        <p>
+                            <a href="<?php echo Utils::generateUrl('frontend.product.show', array(Utils::slugify($product['name']), $product['id'])); ?>" class="btn btn-primary" role="button" title="Afficher détails">
+                                <span class="glyphicon glyphicon-eye-open"></span> Voir
+                            </a> 
+                            <a href="<?php echo Utils::generateUrl('frontend.cart.add', array(Utils::slugify($product['name']), $product['id'])); ?>" class="btn btn-default" role="button" title="Ajouter au panier">
+                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
 
-    <p>Mauris in lectus mattis, sollicitudin sem vitae, lacinia quam. Donec vitae augue vitae leo pretium lacinia nec et massa.</p>
+            </div>
 
-    <p>Nullam facilisis nisi sapien, sit amet varius quam porta in. Suspendisse viverra rutrum mauris porttitor egestas. Vestibulum id nulla facilisis lorem ornare dignissim et non neque. Maecenas interdum euismod fringilla. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+        <?php endfor; ?>
 
-    <p>Pellentesque eleifend viverra velit vel aliquam. Praesent suscipit id urna ac molestie. In eu lacus a tellus fringilla molestie. Morbi eleifend et lorem ac scelerisque. Maecenas eget commodo est. Nam mattis neque euismod dolor adipiscing, imperdiet gravida tortor dignissim. Nulla non condimentum ante, vel feugiat tortor. Nunc fermentum felis ac est vehicula ullamcorper. Nam sed mauris id urna mattis elementum sed vitae libero.</p>
+    </div>
 
-    <p>Nunc urna arcu, malesuada in lobortis non, fringilla ut elit. Ut lorem metus, tincidunt a nibh ac, sagittis sagittis justoelit.</p>
-</div>
+    <?php $i += 3; ?>
+
+<?php endfor; ?>

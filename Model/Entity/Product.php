@@ -18,6 +18,8 @@ class Product extends AbstractEntity
     protected $name;
     protected $price;
     protected $date_created;
+    protected $description;
+    protected $image;
 
     public function __construct($data = array())
     {
@@ -111,6 +113,54 @@ class Product extends AbstractEntity
         }
         
         $this->date_created = $date_created;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of description.
+     *
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Sets the value of description.
+     *
+     * @param mixed $description the description
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of image.
+     *
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Sets the value of image.
+     *
+     * @param mixed $image the image
+     *
+     * @return self
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
 
         return $this;
     }

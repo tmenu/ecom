@@ -20,23 +20,8 @@
         },
 
         "Admin": {
+            "role": "ADMIN",
             "url": "/administration.html"
-        },
-
-        "User": {
-            "url": "/login.html",
-            "sub": {
-                "Login": {
-                    "url": "/connexion.html"
-                },
-                "Logout": {
-                    "url": "/deconnexion.html"
-                },
-                "divider": {},
-                "Signup": {
-                    "url": "/inscription.html"
-                }
-            }
         }
     },
 

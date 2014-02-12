@@ -2,7 +2,9 @@
 
 <h2>
     Supression d'un produit
-    <a href="<?php echo Utils::generateUrl('backend.product.index'); ?>" class="btn btn-default pull-right"><span class="glyphicon glyphicon-arrow-left"></span> Retour</a>
+    <a href="<?php echo Utils::generateUrl('backend.product.index'); ?>" class="btn btn-default pull-right" title="Liste produits">
+        <span class="glyphicon glyphicon-arrow-left"></span> Liste produits
+    </a>
 </h2>
 
 <form class="form-horizontal" role="form" method="post">

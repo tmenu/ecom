@@ -64,9 +64,6 @@ table td, table th {
   margin-right: 3px;
 }
 
-
-
-
 .admin-panel .item {
   height: 125px;
   margin: 0 10px 10px 0;
@@ -106,7 +103,9 @@ table td, table th {
   cursor: pointer;
 }
 
-
+.product-image {
+  width: 120px;
+}
 
 
 

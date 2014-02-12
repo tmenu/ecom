@@ -62,8 +62,9 @@
 
                 <div class="col-sm-3">
                     <div class="sidebar-module sidebar-module-inset">
-                        <h4>Cart</h4>
-                        <?php echo $this->app->call('Frontend', 'Cart', 'index', array('test' => 'foo')); ?>
+                        
+                        <?php echo $this->app->call('Frontend', 'Cart', 'show'); ?>
+
                     </div>
                     <div class="sidebar-module">
                         <h4>Archives</h4>

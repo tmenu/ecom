@@ -1,7 +1,7 @@
 <?php use Library\Utils; ?>
 <h2>
   Ajout d'un client
-  <a class="btn btn-default pull-right" href="<?php echo Utils::generateUrl('backend.client.index'); ?>" title="Retour">
+  <a class="btn btn-default pull-right" href="<?php echo Utils::generateUrl('backend.client.index'); ?>" title="Liste clients">
     <span class="glyphicon glyphicon-arrow-left"></span> Liste clients
   </a>
 </h2>
@@ -143,6 +143,6 @@
   </div>
   
   <div class="form-group text-center">
-    <button type="submit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-save"></span> Ajouter</button>
+    <button type="submit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-save"></span> Enregistrer</button>
   </div>
 </form>

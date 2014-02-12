@@ -44,8 +44,10 @@ class Utils
     static public function randomLipsum($amount = 1, $what = 'paras', $start = 0)
     {
         $data = simplexml_load_file('http://www.lipsum.com/feed/xml?amount='.$amount.'&what='.$what.'&start='.$start)->lipsum;
-    
-        if ($what = 'words') {
+        
+        $data = $data->__toString();
+
+        if ($what == 'words') {
             $data = substr($data, 0, strpos($data, ' '));
         }
 
@@ -244,4 +246,14 @@ class Utils
 
         return $text;
     }
+
+    static public function truncate($text, $chars = 50)
+    {
+        $text = $text." ";
+        $text = substr($text,0,$chars);
+        $text = substr($text,0,strrpos($text,' '));
+        $text = $text."...";
+        return $text;
+    }
+
 }
