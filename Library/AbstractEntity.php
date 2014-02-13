@@ -15,7 +15,7 @@ abstract class AbstractEntity implements ArrayAccess
 {
     protected $id;
 
-    public function __construct(array $data)
+    public function __construct(array $data = array())
     {
         $this->hydrate($data);
     }
