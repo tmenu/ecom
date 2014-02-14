@@ -9,9 +9,9 @@
 
 namespace Application\Frontend\Controller;
 
-use Library\AbstractController;
+use Library\AbstractClass\Controller;
 
-class HomeController extends AbstractController
+class HomeController extends Controller
 {
 	public function indexAction()
 	{

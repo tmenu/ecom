@@ -10,10 +10,11 @@
 namespace Application\Backend\Controller;
 
 use Library\Utils;
-use Library\AbstractController;
+use Library\FormBuilder;
+use Library\AbstractClass\Controller;
 use Model\Entity\Product;
 
-class ProductController extends AbstractController
+class ProductController extends Controller
 {
     public function init()
     {
@@ -72,146 +73,167 @@ class ProductController extends AbstractController
             }
         }
 
-        // Si le formulaire à été soumit
+        // Definition du formulaire pour un produit
+        $product_form = array(
+            array(
+                'name'   => 'name',
+                'type'   => 'text',
+                'label'  => 'Nom',
+                'value'  => $product->getName(),
+                
+                'rules' => array(
+                    'NotNull'   => array('error' => 'Nom du produit obligatoire'),
+                    'MinLenght' => array(
+                        'error' => 'Minimum 3 caractères',
+                        'data'  => array(
+                            'min_lenght' => 3
+                        )
+                    ),
+                    'MaxLenght' => array(
+                        'error' => 'Maximum 255 caractères',
+                        'data'  => array(
+                            'max_lenght' => 255
+                        )
+                    ),
+                    'NotExistsInDb' => array(
+                        'error' => 'Nom de produit déjà existant',
+                        'data' => array(
+                            'manager'       => $this->app['manager']->getManagerOf('Product'),
+                            'test_method'   => 'getByName',
+                            'current_value' => $product->getName()
+                        )
+                    )
+                )
+            ),
+            array(
+                'name'   => 'price',
+                'type'   => 'number',
+                'label'  => 'Prix TTC',
+                'value'  => $product->getPrice(),
+                
+                'rules' => array(
+                    'NotNull' => array('error' => 'Prix obligatoire'),
+                    'Number'  => array('error' => 'Doit être un nombre valide')
+                )
+            ),
+            array(
+                'name'   => 'description',
+                'type'   => 'textarea',
+                'label'  => 'Description',
+                'value'  => $product->getDescription(),
+                
+                'rules' => array(
+                    'NotNull'   => array('error' => 'Description obligatoire'),
+                    'MinLenght' => array(
+                        'error' => 'Minimum 3 caractères',
+                        'data'  => array(
+                            'min_lenght' => 3
+                        )
+                    ),
+                )
+            ),
+            array(
+                'name'      => 'image',
+                'type'      => 'file',
+                'label'     => 'Image',
+                'help_text' => ($product->isNew()) ? '' : 'Image actuelle :<img src="' . $product->getImage() . '" alt="Image actuelle" class="product-image thumbnail" />',
+                
+                'rules' => array(
+                    'File' => array(
+                        'error' => array(
+                            'NO_FILE'           => 'Image obligatoire',
+                            'INVALID_EXTENSION' => 'Extensions autorisés : jpeg, jpg, png et gif',
+                            'INVALID_SIZE'      => 'Maximum 1mo',
+                            'UNKNOW_ERROR'      => 'Erreur pendant le transfert du fichier, veuillez recommencer'
+                        ),
+                        'data'  => array(
+                            'keep_old'   => ($product->isNew()) ? false : true,
+                            'extensions' => array('jpg', 'jpeg', 'png', 'gif'),
+                            'max_size'   => 1048576, // 1 mo
+                        )
+                    )
+                )
+            )
+        );
+
+        // Instanciation du constructeur de formulaire
+        $product_form = new FormBuilder('product_form', $product_form);
+
         if ($this->app['request']->method() == 'POST')
         {
-            // Validation des données
-            $form_errors = array();
+            $product_form->handleForm(array_merge($_POST, $_FILES));
 
-            // Nom obligatoire
-            //     non utilisé
-            if (empty($_POST['name'])) {
-                $form_errors['name'] = 'Nom obligatoire';
-            }
-            else {
-                $prod_manager = $this->app['manager']->getManagerOf('Product');
-
-                // Si le nom du produit est diffèrent de l'ancien et déjà utilisé
-
-                // Si on créé un produit
-                if ($product->isNew())
-                {
-                    // Test si le nom n'éxiste pas
-                    if ($_POST['name'] != $product['name'] && $prod_manager->getByName($_POST['name'])) {
-                        $form_errors['name'] = 'Nom déjà utilisé';
-                    }
-                }
-                else // sinon si on edit un produit
-                {
-                    // Test si le nom n'éxiste pas uniquement si ce n'est pas le même
-                    if ($_POST['name'] != $product['name'] && $prod_manager->getByName($_POST['name'])) {
-                        $form_errors['name'] = 'Nom déjà utilisé';
-                    }
-                }
-            }
-
-            // Prix obligatoire
-            if (empty($_POST['price'])) {
-                $form_errors['price'] = 'Prix obligatoire';
-            }
-
-            // Description obligatoire
-            if (empty($_POST['description'])) {
-                $form_errors['description'] = 'Description obligatoire';
-            }
-
-            // Si on créé un produit OU qu'on en edit un et qu'on a selectionné une image
-            if ($product->isNew() || (!$product->isNew() && $_FILES['image']['error'] != 4))
+            // Validation du formulaire
+            switch ($product_form->isValid())
             {
-                // Image obligatoire
-                if ($_FILES['image']['error'] == 4) {
-                    $form_errors['image'] = 'Veuillez sélectionnez une image';
-                }
-                else if ($_FILES['image']['error'] != 0) {
-                    $form_errors['image'] = 'Une erreur s\'est produite pendant le transfert du fichier';
-                }
-                else
-                {
-                    $extensions_valides = array('jpg' , 'jpeg' , 'gif' , 'png');
+                case FormBuilder::FORM_VALID:
 
-                    $extension_upload = strtolower(substr(strrchr($_FILES['image']['name'], '.'), 1));
-
-                    if (!in_array($extension_upload, $extensions_valides)) {
-                        $form_errors['image'] = 'Format de fichier non autorisé';
-                    }
-                }
-            }
-
-            // Si aucune erreur : enregistrement du produit
-            if (empty($form_errors))
-            {
-                // Si on créé un produit OU qu'on en edit un et qu'on a selectionné une image
-                if ($product->isNew() || (!$product->isNew() && $_FILES['image']['error'] == 0))
-                {
-                    // Création du chemin de l'image
-                    $upload_dir = dirname(__DIR__) . '/../../web';
-
-                    // Si c'est une édition : supression de l'ancienne image
-                    if (!$product->isNew())
+                    // Si nouveau produit OU ancien produit avec nouvelle image : upload de l'image
+                    if ($product->isNew() || (!$product->isNew() && $product_form->getField('image')->getValue()['error'] != 4))
                     {
-                        unlink($upload_dir . $product->getImage());
+                        // Création du chemin de l'image
+                        $upload_dir = dirname(__DIR__) . '/../../web';
+
+                        // Si c'est une édition : supression de l'ancienne image
+                        if (!$product->isNew())
+                        {
+                            unlink($upload_dir . $product->getImage());
+                        }
+
+                        // Enregistrement de l'image
+                        $image_path = '/upload/' . Utils::generateString(30) . '.' . strtolower(substr(strchr($_FILES['image']['name'], '.'), 1));
+
+                        move_uploaded_file($_FILES['image']['tmp_name'], $upload_dir.$image_path);
+
+                        $product->setImage($image_path);
                     }
 
-                    // Enregistrement de l'image
-                    $image_path = '/upload/' . Utils::generateString(30) . '.' . strtolower(substr(strchr($_FILES['image']['name'], '.'), 1));
+                    // Modification du produit
+                    $product->setName($_POST['name']);
+                    $product->setPrice($_POST['price']);
+                    $product->setDescription($_POST['description']);
 
-                    move_uploaded_file($_FILES['image']['tmp_name'], $upload_dir.$image_path);
+                    // Récupération du manager des produits
+                    $prod_manager = $this->app['manager']->getManagerOf('Product');
 
-                    $product->setImage($image_path);
-                }
+                    // Enregistrement du produit
+                    $prod_manager->save($product);
 
-                // Récupération du manager des produits
-                $prod_manager = $this->app['manager']->getManagerOf('Product');
+                    // Si on créé un produit
+                    if ($product->isNew())
+                    {
+                        $this->app['session']->setFlashMessage('success', 'Le produit à bien été créé.');
+                    }
+                    else // sinon si on edit un produit
+                    {
+                        $this->app['session']->setFlashMessage('success', 'Le produit à bien été édité.');
+                    }
 
-                // Modification du produit
-                $product->setName($_POST['name']);
-                $product->setPrice($_POST['price']);
-                $product->setDescription($_POST['description']);
+                    $this->app['response']->redirect('backend.product.index');
 
-                // Enregistrement du produit
-                $prod_manager->save($product);
+                break;
 
-                // Définition d'un message et redirection
+                case FormBuilder::TOKEN_EXPIRE:
 
-                // Si on créé un produit
-                if ($product->isNew())
-                {
-                    $this->app['session']->setFlashMessage('success', 'Le produit à bien été créé.');
-                }
-                else // sinon si on edit un produit
-                {
-                    $this->app['session']->setFlashMessage('success', 'Le produit à bien été édité.');
-                }
+                    $this->app['session']->setFlashMessage('danger', 'La durée de validité du formulaire à éxpirée, veuillez de réessayer.');
+                
+                break;
 
-                $this->app['response']->redirect('backend.product.index');
+                case FormBuilder::TOKEN_INVALID:
+
+                    $this->app['session']->setFlashMessage('danger', 'Le jeton fournit pour le formulaire n\'est pas valide.');
+                
+                break;
             }
-            else // Sinon ajout des erreurs à la vue
-            {  
-                $this->app['response']->addVar('form_errors', $form_errors);
-            }
-        }
-        else // Valeurs par defaut
-        {
-            $_POST['name']        = $product->getName();
-            $_POST['price']       = $product->getPrice();
-            $_POST['description'] = $product->getDescription();
-            $_POST['image']       = $product->getImage();
         }
 
         // Ajout du fichier JS pour gérer l'upload
         $this->app['response']->addJsEnd('fileupload.js');
 
-        // Génération de la vue
+        // Affectation du formulaire à la vue
+        $this->app['response']->addVar('product_form', $product_form);
 
-        // Si on créé un produit
-        if ($product->isNew())
-        {
-            $this->fetch('Product/add.php');
-        }
-        else // sinon si on edit un produit
-        {
-            $this->fetch('Product/edit.php');
-        }
+        $this->fetch();
     }
 
     /**

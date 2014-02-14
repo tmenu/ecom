@@ -7,10 +7,9 @@
  * Date : 08/12/2013
  */
 
-namespace Library;
+namespace Library\ApplicationComponent;
 
-use Exception;
-use DOMDocument;
+use Library\AbstractClass\ApplicationComponent;
 
 class Router extends ApplicationComponent
 {
@@ -24,7 +23,7 @@ class Router extends ApplicationComponent
 	public function __construct()
 	{
 		// Récupération des routes
-		$this->routes = json_decode(file_get_contents(dirname(__DIR__) . '/config/routes.json'), true);
+		$this->routes = json_decode(file_get_contents(realpath(__DIR__ . '/../../config/routes.json')), true);
 	}
 
 	/**

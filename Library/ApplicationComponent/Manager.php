@@ -1,16 +1,15 @@
 <?php
 
 /**
- * Fichier : /Library/Manager.php
- * Description : Manager de base de données
+ * Fichier : /Library/ApplicationComponent/Manager.php
+ * Description : Manager de base de données et de l'appel de manager d'entités
  * Auteur Thomas Menu
  * Date : 07/12/2013
  */
 
-namespace Library;
+namespace Library\ApplicationComponent;
 
-use Exception;
-use PDO;
+use Library\AbstractClass\ApplicationComponent;
 
 class Manager extends ApplicationComponent
 {
@@ -23,10 +22,10 @@ class Manager extends ApplicationComponent
 		if ($this->dao === null)
 		{
 			try {
-			    $this->dao = new PDO('mysql:host=' . $this->app['config']['db']['host'] . ';dbname=' . $this->app['config']['db']['base'], $this->app['config']['db']['user'], $this->app['config']['db']['pass']);
+			    $this->dao = new \PDO('mysql:host=' . $this->app['config']['db']['host'] . ';dbname=' . $this->app['config']['db']['base'], $this->app['config']['db']['user'], $this->app['config']['db']['pass']);
 			}
 			catch (Exception $e) {
-			    throw new Exception($e->getMessage());
+			    throw new \Exception($e->getMessage());
 			}
 
 			$this->dao->query('SET NAMES "utf8"');
@@ -42,7 +41,7 @@ class Manager extends ApplicationComponent
 			$manager_class = 'Model\\Manager\\' . ucfirst(mb_strtolower($entity)) . 'Manager';
 
 			if (!class_exists($manager_class)) {
-				throw new Exception('Class '. $manager_class . ' doesn\'t exists !');
+				throw new \Exception('Class '. $manager_class . ' doesn\'t exists !');
 			}
 
 			$this->managers[$entity] = new $manager_class( $this->getDao() );

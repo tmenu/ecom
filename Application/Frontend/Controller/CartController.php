@@ -9,9 +9,9 @@
 
 namespace Application\Frontend\Controller;
 
-use Library\AbstractController;
+use Library\AbstractClass\Controller;
 
-class CartController extends AbstractController
+class CartController extends Controller
 {
     public function init()
     {

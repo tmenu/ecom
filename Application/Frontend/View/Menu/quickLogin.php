@@ -22,6 +22,7 @@
             <label class="sr-only" for="password">Mot de passe</label>
             <input type="password" class="form-control input-sm" id="password" name="password" placeholder="Mot de passe">
         </div>
+        <?php echo $quick_login_form->generateField('quick_login_form_token'); ?>
         <button type="submit" class="btn btn-sm btn-default">Connexion</button>
     </form>
 <?php endif; ?>

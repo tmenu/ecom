@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Fichier : /Library/Entity.php
+ * Fichier : /Library/AbstractClass/Entity.php
  * Description : Modèle d'une entité
  * Auteur : Thomas Menu
  * Date : 10/02/2014
  */
 
-namespace Library;
+namespace Library\AbstractClass;
 
 use ArrayAccess; // Pour utiliser l'objet comme un tableau
 
-abstract class AbstractEntity implements ArrayAccess
+abstract class Entity implements ArrayAccess
 {
     protected $id;
 
@@ -57,7 +57,7 @@ abstract class AbstractEntity implements ArrayAccess
     public function setId($id)
     {
         if (!is_numeric($id) && $id !== NULL) {
-            throw new InvalidArgumentException('$id must be numeric');
+            throw new \InvalidArgumentException('$id must be numeric');
         }
 
         $this->id = $id;
@@ -90,7 +90,7 @@ abstract class AbstractEntity implements ArrayAccess
      */
     public function offsetSet($var, $value)
     {
-        throw new Exception('Cannot set property on this object !');
+        throw new \Exception('Cannot set property on this object !');
     }
     
     /**
@@ -110,6 +110,6 @@ abstract class AbstractEntity implements ArrayAccess
      */
     public function offsetUnset($var)
     {
-        throw new Exception('Cannot unset property on this object !');
+        throw new \Exception('Cannot unset property on this object !');
     }
 }

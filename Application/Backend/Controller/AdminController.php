@@ -9,9 +9,9 @@
 
 namespace Application\Backend\Controller;
 
-use Library\AbstractController;
+use Library\AbstractClass\Controller;
 
-class AdminController extends AbstractController
+class AdminController extends Controller
 {
     public function init()
     {

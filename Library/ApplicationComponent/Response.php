@@ -1,15 +1,16 @@
 <?php
 
 /**
- * Fichier : /Library/Response.php
+ * Fichier : /Library/ApplicationComponent/Response.php
  * Description : Gestion requète HTTP 
  * Auteur Thomas Menu
  * Date : 07/12/2013
  */
 
-namespace Library;
+namespace Library\ApplicationComponent;
 
-use Exception;
+use Library\AbstractClass\ApplicationComponent;
+use Library\Utils;
 
 class Response extends ApplicationComponent
 {
@@ -24,7 +25,7 @@ class Response extends ApplicationComponent
      * @param void
      * @return void
      */
-	public function __construct(Application $app)
+	public function __construct($app)
 	{
 		parent::__construct($app);
 
@@ -41,9 +42,9 @@ class Response extends ApplicationComponent
      */
 	public function setLayout($layout_path)
 	{
-		// Si le layout n'existe pas
+        // Si le layout n'existe pas
 		if (!file_exists($layout_path)) {
-			throw new Exception('File '. $layout_path . ' doesn\'t exists !');
+			throw new \Exception('File '. $layout_path . ' doesn\'t exists !');
 		}
 
 		$this->layout_path = $layout_path;
@@ -121,9 +122,10 @@ class Response extends ApplicationComponent
      */
 	public function redirect404()
 	{
-		$this->addCss('styles.css');
-		$this->setLayout(dirname(__DIR__) . '/View/layout.php');
-		$this->renderTemplate(dirname(__DIR__) . '/errors/404.html');
+		/*$this->addCss('styles.css');
+
+		$this->setLayout(dirname(__DIR__) . '/../View/layout.php');
+		$this->renderTemplate(dirname(__DIR__) . '/errors/404.html');*/
 	}
 
 	/**
@@ -135,7 +137,7 @@ class Response extends ApplicationComponent
 	{
 		// Si la vue n'existe pas
 		if (!file_exists($view)) {
-			throw new Exception('File '. $view . ' doesn\'t exists !');
+			throw new \Exception('File '. $view . ' doesn\'t exists !');
 		}
 
 		// Extraction des variables à passer à la vue
@@ -163,7 +165,7 @@ class Response extends ApplicationComponent
     {
         // Si la vue n'existe pas
         if (!file_exists($view)) {
-            throw new Exception('File '. $view . ' doesn\'t exists !');
+            throw new \Exception('File '. $view . ' doesn\'t exists !');
         }
 
         // Extraction des variables à passer à la vue

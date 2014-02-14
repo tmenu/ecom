@@ -9,11 +9,9 @@
 
 namespace Model\Entity;
 
-use Library\AbstractEntity;
-use DateTime;
-use InvalidArgumentException;
+use Library\AbstractClass\Entity;
 
-class Product extends AbstractEntity
+class Product extends Entity
 {
     protected $name;
     protected $price;
@@ -23,7 +21,7 @@ class Product extends AbstractEntity
 
     public function __construct($data = array())
     {
-        $this->setDate_created(new DateTime());
+        $this->setDate_created(new \DateTime());
 
         parent::__construct($data);
     }
@@ -48,7 +46,7 @@ class Product extends AbstractEntity
     public function setName($name)
     {
         if (!is_string($name)) {
-            throw new InvalidArgumentException('$name must be a string');
+            throw new \InvalidArgumentException('$name must be a string');
         }
 
         $this->name = $name;
@@ -76,7 +74,7 @@ class Product extends AbstractEntity
     public function setPrice($price)
     {
         if (!is_numeric($price)) {
-            throw new InvalidArgumentException('$price must be numeric');
+            throw new \InvalidArgumentException('$price must be numeric');
         }
 
         $this->price = $price;
@@ -109,7 +107,7 @@ class Product extends AbstractEntity
     public function setDate_created($date_created)
     {
         if (is_string($date_created)) {
-            $date_created = new DateTime($date_created);
+            $date_created = new \DateTime($date_created);
         }
         
         $this->date_created = $date_created;

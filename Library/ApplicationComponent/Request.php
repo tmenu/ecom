@@ -1,13 +1,15 @@
 <?php
 
 /**
- * Fichier : /Library/Request.php
+ * Fichier : /Library/ApplicationComponent/Request.php
  * Description : Gestion requète HTTP 
  * Auteur Thomas Menu
  * Date : 07/12/2013
  */
 
-namespace Library;
+namespace Library\ApplicationComponent;
+
+use Library\AbstractClass\ApplicationComponent;
 
 class Request extends ApplicationComponent
 {

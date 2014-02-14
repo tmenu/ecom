@@ -20,6 +20,7 @@
 			<th>Email</th>
 			<th>Nom prénom</th>
 			<th>Date d'inscription</th>
+			<th>Droit(s)</th>
 			<th>Action</th>
 		</tr>
 	</thead>
@@ -32,6 +33,13 @@
 				<td><?php echo Utils::secure($client['email']); ?></td>
 				<td><?php echo Utils::secure($client['lastname'] . ' ' . $client['firstname']); ?></td>
 				<td><?php echo $client['date_subscribed']; ?></td>
+				<td class="text-left">
+					<ul>
+					<?php foreach ($client['roles'] as $role): ?>
+						<li><?php echo $this->app['config']['roles'][$role]; ?></li>
+					<?php endforeach; ?>
+					</ul>
+				</td>
 				<td>
 					<a class="glyphicon glyphicon-edit" href="<?php echo Utils::generateUrl('backend.client.edit',  array(Utils::slugify($client['username']), $client['id'])); ?>" title="Editer"></a>
 					<a class="glyphicon glyphicon-trash" href="<?php echo Utils::generateUrl('backend.client.delete', array(Utils::slugify($client['username']), $client['id'])); ?>" title="Supprimer"></a>

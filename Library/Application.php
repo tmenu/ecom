@@ -9,10 +9,13 @@
 
 namespace Library;
 
-use Exception;
-use ArrayAccess; // Pour utiliser l'objet comme un tableau
+use Library\ApplicationComponent\Router;
+use Library\ApplicationComponent\Request;
+use Library\ApplicationComponent\Response;
+use Library\ApplicationComponent\Session;
+use Library\ApplicationComponent\Manager;
 
-class Application implements ArrayAccess
+class Application implements \ArrayAccess
 {
 	protected $config   = array(); // Tableau des données de config
 
@@ -34,8 +37,8 @@ class Application implements ArrayAccess
 		// Initialisation des composants de l'application
 		$this->request  = new Request($this);
 		$this->response = new Response($this);
-		$this->manager  = new Manager($this);
 		$this->session  = new Session($this);
+		$this->manager  = new Manager($this);
 	}
 
 	/**

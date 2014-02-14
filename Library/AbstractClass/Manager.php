@@ -1,22 +1,21 @@
 <?php
 
 /**
- * Fichier : /Library/AbstractManager.php
- * Description : Controleur des produits
+ * Fichier : /Library/AbstractClass/Manager.php
+ * Description : Modèle d'un manager d'entité
  * Auteur : Thomas Menu
  * Date : 10/02/2014
  */
 
-namespace Library;
+namespace Library\AbstractClass;
 
-use PDO;
-use Library\AbstractEntity;
+use Library\AbstractClass\Entity;
 
-abstract class AbstractManager
+abstract class Manager
 {
     protected $dao = null;
 
-    public function __construct(PDO $dao)
+    public function __construct(\PDO $dao)
     {
         $this->dao = $dao;
     }
@@ -24,7 +23,7 @@ abstract class AbstractManager
     abstract public function get($id);
     abstract public function getAll();
 
-    public function save(AbstractEntity $entity)
+    public function save(Entity $entity)
     {
         // Si l'entité n'a pas d'identifiant : nouvel enregistrement
         if ($entity->getId() === null)
@@ -37,8 +36,8 @@ abstract class AbstractManager
         }
     }
 
-    abstract protected function insert(AbstractEntity $entity);
-    abstract protected function update(AbstractEntity $entity);
+    abstract protected function insert(Entity $entity);
+    abstract protected function update(Entity $entity);
 
     abstract public function delete($id);
 }

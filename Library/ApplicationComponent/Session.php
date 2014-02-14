@@ -1,13 +1,15 @@
 <?php
 
 /**
- * Fichier : /Library/Session.php
+ * Fichier : /Library/ApplicationComponent/Session.php
  * Description : Gestion de la session utilisateur
  * Auteur Thomas Menu
  * Date : 08/12/2013
  */
 
-namespace Library;
+namespace Library\ApplicationComponent;
+
+use Library\AbstractClass\ApplicationComponent;
 
 class Session extends ApplicationComponent
 {
@@ -24,7 +26,7 @@ class Session extends ApplicationComponent
 			$this->setAttr('id',       0);
 			$this->setAttr('username', '');
 			$this->setAttr('email',    '');
-			$this->setAttr('roles',    array());
+			$this->setAttr('roles',    array('NOT_CONNECTED'));
 		}
 	}
 

@@ -9,14 +9,16 @@
 
 namespace Model\Manager;
 
-use PDO;
+use Library\AbstractClass\Manager;
+use Library\AbstractClass\Entity;
+
 use Library\Utils;
 use Library\AbstractManager;
 use Library\AbstractEntity;
 use Model\Entity\Client;
 use DateTime;
 
-class ClientManager extends AbstractManager
+class ClientManager extends Manager
 {
     public function get($id)
     {
@@ -83,7 +85,7 @@ class ClientManager extends AbstractManager
         return $clients_list;
     }
 
-    protected function insert(AbstractEntity $client)
+    protected function insert(Entity $client)
     {
         $request = $this->dao->prepare('INSERT INTO client 
                                         SET username        = :username, 
@@ -117,10 +119,9 @@ class ClientManager extends AbstractManager
         $request->bindValue('country',         $client->getCountry());
 
         $request->execute();
-
     }
 
-    protected function update(AbstractEntity $client)
+    protected function update(Entity $client)
     {
         $request = $this->dao->prepare('UPDATE client
                                         SET username        = :username,
@@ -142,7 +143,7 @@ class ClientManager extends AbstractManager
         $request->bindValue('username',        $client->getUsername());
         $request->bindValue('password',        $client->getPassword());
         $request->bindValue('email',           $client->getEmail());
-        $request->bindValue('date_subscribed', $client->getDate_subscribed(false));
+        $request->bindValue('date_subscribed', $client->getDate_subscribed(true));
         $request->bindValue('token',           $client->getToken());
         $request->bindValue('salt',            $client->getSalt());
         $request->bindValue('roles',           $client->getRoles(true));
@@ -155,7 +156,7 @@ class ClientManager extends AbstractManager
         $request->bindValue('city',            $client->getCity());
         $request->bindValue('country',         $client->getCountry());
 
-        $request->bindValue('id',              $client->getId(), PDO::PARAM_INT);
+        $request->bindValue('id',              $client->getId(), \PDO::PARAM_INT);
 
         $request->execute();
     }

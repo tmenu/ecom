@@ -34,7 +34,7 @@
                 <tr>
                     <td><?php echo $product['id']; ?></td>
                     <td>
-                        <a href="<?php echo Utils::generateUrl('backend.product.show', array(Utils::slugify($product['name']), $product['id'])); ?>">
+                        <a href="<?php echo Utils::generateUrl('frontend.product.show', array(Utils::slugify($product['name']), $product['id'])); ?>">
                             <?php echo Utils::secure($product['name']); ?>
                         </a>
                     </td>

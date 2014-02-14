@@ -9,14 +9,15 @@
 
 namespace Model\Manager;
 
+use Library\AbstractClass\Manager;
+use Library\AbstractClass\Entity;
+
 use Library\Utils;
-use Library\AbstractManager;
-use Library\AbstractEntity;
 use Model\Entity\Product;
 use DateTime;
 use InvalidArgumentException;
 
-class ProductManager extends AbstractManager
+class ProductManager extends Manager
 {
     public function get($id)
     {
@@ -38,10 +39,6 @@ class ProductManager extends AbstractManager
 
     public function getByName($name)
     {
-        if (!is_string($name)) {
-            throw new InvalidArgumentException('$name must be a string');
-        }
-
         $q = $this->dao->prepare('SELECT *
                                   FROM product
                                   WHERE name = :name');
@@ -80,7 +77,7 @@ class ProductManager extends AbstractManager
         }
     }
 
-    protected function insert(AbstractEntity $product)
+    protected function insert(Entity $product)
     {
         $q = $this->dao->prepare('INSERT INTO product
                                   SET name         = :name,
@@ -95,12 +92,12 @@ class ProductManager extends AbstractManager
         $q->bindValue(':description',  $product->getDescription());
         $q->bindValue(':image',        $product->getImage());
 
-        var_dump($q->execute());
+        $q->execute();
 
         return $this;
     }
 
-    protected function update(AbstractEntity $product)
+    protected function update(Entity $product)
     {
         $q = $this->dao->prepare('UPDATE product
                                   SET name         = :name,

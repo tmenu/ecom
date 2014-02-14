@@ -1,11 +1,11 @@
 <?php use Library\Utils; ?>
 <h2>
-  Edition d'un client
-  <a class="btn btn-default pull-right" href="<?php echo Utils::generateUrl('backend.client.index'); ?>" title="Retour">
-    <span class="glyphicon glyphicon-arrow-left"></span> Liste clients
-  </a>
+    <?php echo $_MAIN_TITLE; ?>
+    <a class="btn btn-default pull-right" href="<?php echo Utils::generateUrl('backend.client.index'); ?>" title="Retour">
+        <span class="glyphicon glyphicon-arrow-left"></span> Liste clients
+    </a>
 </h2>
-<form class="form-horizontal" role="form" id="form-client" method="POST">
+<!--<form class="form-horizontal" role="form" id="form-client" method="POST">
 
   <div class="row well">
 
@@ -145,4 +145,45 @@
   <div class="form-group text-center">
     <button type="submit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-save"></span> Editer</button>
   </div>
-</form>
+</form>-->
+
+<?php echo $client_form->formStart(); ?>
+
+    <div class="well row">
+
+        <div class="col-sm-6">
+            <h3>Identifiants</h3>
+            <?php
+
+            echo $client_form->generateField('username', 5);
+            echo $client_form->generateField('password', 5);
+            echo $client_form->generateField('confirm_password', 5);
+            echo $client_form->generateField('email', 5);
+            echo $client_form->generateField('roles', 5);
+
+            ?>
+        </div>
+
+        <div class="col-sm-6">
+            <h3>Coordonnées</h3>
+            <?php
+
+            echo $client_form->generateField('lastname');
+            echo $client_form->generateField('firstname');
+            echo $client_form->generateField('address0');
+            echo $client_form->generateField('address1');
+            echo $client_form->generateField('city');
+            echo $client_form->generateField('postal_code');
+            echo $client_form->generateField('country');
+
+            ?>
+        </div>
+
+    </div>
+
+    <div class="form-group text-center">
+        <button type="submit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-save"></span> Enregistrer</button>
+    </div>
+
+<?php echo $client_form->formEnd(); ?>
+

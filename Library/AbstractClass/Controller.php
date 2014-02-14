@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Fichier : /Library/AbstractController.php
+ * Fichier : /Library/AbstractClass/Controller.php
  * Description : Modèle d'un controleur
  * Auteur Thomas Menu
  * Date : 07/12/2013
  */
 
-namespace Library;
+namespace Library\AbstractClass;
 
-use Exception;
+use Library\Application;
 
-class AbstractController
+abstract class Controller
 {
 	protected $app = null; // Lien vers l'application
 
@@ -36,7 +36,7 @@ class AbstractController
         $this->action      = $action;
 
 		// Création et définition du chemin du layout
-		$layout = dirname(__DIR__) . '/Application/' . $this->application . '/View/layout.php';
+		$layout = realpath(__DIR__ . '/../../Application/' . $this->application . '/View/layout.php');
 
 		$this->app['response']->setLayout($layout);
 	}
@@ -61,7 +61,7 @@ class AbstractController
 
 		// Si la méthode n'éxiste pas
 		if (!method_exists($this, $method_name)) {
-			throw new Exception('Method '. $method_name . ' doesn\'t exists !');
+			throw new \Exception('Method '. $method_name . ' doesn\'t exists !');
 		}
 
 		// Initialisation
@@ -81,10 +81,10 @@ class AbstractController
 		// Si aucune vue spécifique n'est requise : vue par defaut
 		if ($view === '') {
 			// Création du chemin de la vue
-			$view = dirname(__DIR__) . '/Application/' . $this->application . '/View/' . $this->controller . '/' . $this->action . '.php';
+			$view = realpath(__DIR__ . '/../../Application/' . $this->application . '/View/' . $this->controller . '/' . $this->action . '.php');
 		}
         else {
-            $view = dirname(__DIR__) . '/Application/' . $this->application . '/View/' . $view;
+            $view = realpath(__DIR__ . '/../../Application/' . $this->application . '/View/' . $view);
         }
 
 		// Génération du la page finale
@@ -101,10 +101,10 @@ class AbstractController
         // Si aucune vue spécifique n'est requise : vue par defaut
         if ($view === '') {
             // Création du chemin de la vue
-            $view = dirname(__DIR__) . '/Application/' . $this->application . '/View/' . $this->controller . '/' . $this->action . '.php';
+            $view = realpath(__DIR__ . '/../../Application/' . $this->application . '/View/' . $this->controller . '/' . $this->action . '.php');
         }
         else {
-            $view = dirname(__DIR__) . '/Application/' . $this->application . '/View/' . $view . '';
+            $view = realpath(__DIR__ . '/../../Application/' . $this->application . '/View/' . $view . '');
         }
 
         // Génération du la page finale

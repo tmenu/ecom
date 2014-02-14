@@ -9,12 +9,10 @@
 
 namespace Model\Entity;
 
+use Library\AbstractClass\Entity;
 use Library\Utils;
-use Library\AbstractEntity;
-use DateTime;
-use InvalidArgumentException;
 
-class Client extends AbstractEntity
+class Client extends Entity
 {
     protected $username;
     protected $password;
@@ -33,7 +31,7 @@ class Client extends AbstractEntity
 
     public function __construct($data = array())
     {
-        $this->setDate_subscribed(new DateTime());
+        $this->setDate_subscribed(new \DateTime());
 
         $this->setNewToken();
         $this->setNewSalt();
@@ -61,7 +59,7 @@ class Client extends AbstractEntity
     public function setUsername($username)
     {
         if (!is_string($username)) {
-            throw new InvalidArgumentException('$username must be a string');
+            throw new \InvalidArgumentException('$username must be a string');
         }
 
         $this->username = $username;
@@ -89,7 +87,7 @@ class Client extends AbstractEntity
     public function setPassword($password)
     {
         if (!is_string($password)) {
-            throw new InvalidArgumentException('$password must be a string');
+            throw new \InvalidArgumentException('$password must be a string');
         }
 
         $this->password = $password;
@@ -117,7 +115,7 @@ class Client extends AbstractEntity
     public function setEmail($email)
     {
         if (!is_string($email)) {
-            throw new InvalidArgumentException('$email must be a string');
+            throw new \InvalidArgumentException('$email must be a string');
         }
 
         $this->email = $email;
@@ -145,7 +143,7 @@ class Client extends AbstractEntity
     public function setToken($token)
     {
         if (!is_string($token)) {
-            throw new InvalidArgumentException('$token must be a string');
+            throw new \InvalidArgumentException('$token must be a string');
         }
 
         $this->token = $token;
@@ -187,7 +185,7 @@ class Client extends AbstractEntity
     public function setSalt($salt)
     {
         if (!is_string($salt)) {
-            throw new InvalidArgumentException('$salt must be a string');
+            throw new \InvalidArgumentException('$salt must be a string');
         }
 
         $this->salt = $salt;
@@ -235,7 +233,7 @@ class Client extends AbstractEntity
     {
         if(is_string($date_subscribed))
         {
-            $date_subscribed = new DateTime($date_subscribed);
+            $date_subscribed = new \DateTime($date_subscribed);
         }
 
         $this->date_subscribed = $date_subscribed;
